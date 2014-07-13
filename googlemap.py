@@ -33,5 +33,9 @@ class GoogleMap:
     def addPoint(self, point):
         self.map.maps[0].setpoint(point)
 
+    def addPoints(self, points):
+        for point in points:
+            self.addPoint(point)
+            
     def showHtml(self):
         return self.map.showhtml()
