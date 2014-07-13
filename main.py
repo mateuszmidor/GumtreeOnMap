@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import querryoffersource
 from geocoder import Geocoder
 from googlemap import GoogleMap
@@ -22,17 +23,26 @@ def fetchOffers(numPages = 1):
         offers += querryoffersource.getOffers(GUMTREE_QUERRY + str(i+1))
 
     return offers
+
+def saveMapAsHtmlPage(gmap, filename):
+    #directory = os.path.dirname(os.path.abspath(__file__))
+    outputHtmlFilename = filename#os.path.join(directory, filename)
+    with open(outputHtmlFilename,'wb') as f:
+        f.write(gmap.showHtml())
+        f.close()
+
+    print "Map saved in ", outputHtmlFilename
     
-def run():    
+def run():
+    print "Starting fetching offers and generating map..."
+    
     gmap = getGoogleMapForKrakow()
-    
     offers = fetchOffers(3)
     points = OffersAsGooglePointsComposer.compose(offers)
-    for point in points:
-        gmap.addPoint(point)
-        
-    open('OfferMap.htm','wb').write(gmap.showHtml()) 
-    
+    gmap.addPoints(points)
+    saveMapAsHtmlPage(gmap, 'OfferMap.htm')
+
+    raw_input("Press ENTER to finish")
 run()
 
 
