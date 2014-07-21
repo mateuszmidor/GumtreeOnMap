@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 import codecs
-
+import re
 class AddressExtractor:
-    addresses = []
+    addresses = {}
 
     def loadAddresses(self, filename):
         with codecs.open(filename, encoding="utf-8") as f:
@@ -16,10 +17,18 @@ class AddressExtractor:
         self.addresses = self.loadAddresses(addressesFilename)
 
 
+    
     def extract(self, *descriptions):
+        """ This function needs some speedup"""
         for source in descriptions:
             source = source.lower()
             for address in self.addresses:
                 if (source.find(address)) != -1:
-                    return address
-            
+                    f = re.match(address + r' \d*\\?\d*', source)
+                    if (f):
+                        return f.group(0)
+
+#--------------------------- DEMO
+if (__name__ == "__main__"):
+    extractor = AddressExtractor("streets.txt")
+    print extractor.extract(u"Ludomira Różyckiego 5")
