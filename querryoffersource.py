@@ -1,10 +1,48 @@
-import urllib2
+import urllib3 # for thread safety, urllib2 hangs the app
 import re
+import threading
+import Queue
 import gumtreeofferparser as parser
 
+class HtmlFetcher:
+    @staticmethod
+    def fetch(url):
+        http = urllib3.PoolManager()
+        r = http.request('GET', url)
+        return unicode(r.data, "UTF-8")
+    
+class OfferFetcher(threading.Thread):
+    def __init__(self, inQueue, outQueue):
+        threading.Thread.__init__(self)
+        self.inQueue = inQueue
+        self.outQueue = outQueue
 
-def fetchHtml(url):
-    return unicode(urllib2.urlopen(url).read(), "UTF-8")
+    def getOffer(self, url):
+        html = HtmlFetcher.fetch(url)
+        title = parser.extractTitle(html)
+        date = parser.extractDate(html)
+        price = parser.extractPrice(html)
+        address = parser.extractAddress(html)
+        description = parser.extractDescription(html)
+        summary = parser.extractSummary(html)
+        imageUrl = parser.extractImageUrl(html)
+        offer = {"title" : title,
+                 "date" : date,
+                 "price" : price,
+                 "address" : address,
+                 "description" : description,
+                 "summary" : summary,
+                 "url" : url,
+                 "imageUrl" : imageUrl}
+        return offer
+    
+    def run(self):
+        url = self.inQueue.get()       
+        offer = self.getOffer(url)
+        self.outQueue.put(offer)
+        self.inQueue.task_done()
+
+
 
 def extractUrlFromHtml(html):
     pattern = 'a href="([^"]*)'
@@ -30,28 +68,28 @@ def extractOfferUrls(html):
     return urls
 
 def getOffers(gumtreeQuerry):
-    html = fetchHtml(gumtreeQuerry)
+    html = HtmlFetcher.fetch(gumtreeQuerry)
     urls = extractOfferUrls(html)
-    offers = []
     
+    inQueue = Queue.Queue()
+    outQueue = Queue.Queue()
+
+    # fetch offers in seperate threads
     for url in urls:
-        html = fetchHtml(url)
-        title = parser.extractTitle(html)
-        date = parser.extractDate(html)
-        price = parser.extractPrice(html)
-        address = parser.extractAddress(html)
-        description = parser.extractDescription(html)
-        summary = parser.extractSummary(html)
-        imageUrl = parser.extractImageUrl(html)
-        offer = {"title" : title,
-                 "date" : date,
-                 "price" : price,
-                 "address" : address,
-                 "description" : description,
-                 "summary" : summary,
-                 "url" : url,
-                 "imageUrl" : imageUrl}
-        offers.append(offer)
+        t = OfferFetcher(inQueue, outQueue)
+        t.setDaemon(True)
+        t.start()
+        inQueue.put(url)
+        
+
+    # wait for all pages to be processed
+    print "Waiting for threads to finish processing pages..."
+    inQueue.join()
+    print "Finished"
+    offers = []
+    for i in range(len(urls)):
+        offers.append(outQueue.get())
+        
         
     return offers   
    
@@ -71,4 +109,4 @@ if (__name__ == "__main__"):
                                offer["summary"],
                                offer["imageUrl"],
                                offer["url"])
-    
+
