@@ -1,4 +1,5 @@
-﻿Agrestowa
+﻿Lea
+Agrestowa
 Akademicka
 Altanowa
 Amazonek
@@ -289,6 +290,7 @@ Samuela Lindego
 28 Lipca 1943
 Lisia
 29 Listopada
+29-Listopada
 Litawora
 Litewska
 Lniana
@@ -512,7 +514,7 @@ Henryka Sienkiewicza
 6 Sierpnia
 Siewna
 Skalna
-Stanisława Skarbińskiego
+Skarbińskiego
 Piotra Skargi
 Skibowa
 Składowa
@@ -1260,7 +1262,7 @@ Bławatkowa
 Błotna
 Błotniska
 Bobrowa
-prof. Michała Bobrzyńskiego
+Michała Bobrzyńskiego
 Adama Bochenka
 o. Józefa Bocheńskiego
 prof. Adama Bochnaka
@@ -1534,7 +1536,7 @@ Jeleniogórska
 Konstantego Jelskiego
 Jemiołowa
 Jerozolimska
-Erazma Jerzmanowskiego
+Jerzmanowskiego
 Jesienna
 Jeździecka
 Jeżów
@@ -2200,7 +2202,7 @@ Tarnobrzeska
 Tarnowska
 Jana Tarnowskiego
 Tatrzańska
-Leonida Teligi
+Teligi
 Telimeny
 Tęczowa
 Józefa Tischnera
@@ -2528,7 +2530,7 @@ Kielecka
 Zenona Klemensiewicza
 Rynek Kleparski
 Jana Kochanowskiego
-Oskara Kolberga
+Kolberga
 Koletek
 Hugona Kołłątaja
 Mikołaja Kopernika
@@ -2569,7 +2571,7 @@ Aleksandra Lubomirskiego
 Ładna
 św. Łazarza
 Łąkowa
-Józefa Łepkowskiego
+Łepkowskiego
 Łobzowska
 Ignacego Łukasiewicza
 Władysława Łuszczkiewicza
@@ -2817,7 +2819,7 @@ pl. Wszystkich Świętych
 Wygoda
 Wysoka
 Zacisze
-Bohdana Zaleskiego
+Zaleskiego
 Ludwika Zamenhofa
 Zaułek Książąt Czartoryskich
 Zaułek Wileński
