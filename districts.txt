@@ -1,56 +1,56 @@
-STARE MIASTO
+ÔªøSTARE MIASTO
 Kazimierz
 Kleparz
 Nowe Miasto
-Nowy åwiat
+Nowy ≈öwiat
 Piasek
 Stare Miasto
 Stradom
 Warszawskie
 Wawel
 
-GRZEG”RZKI
-Dπbie
-GrzegÛrzki
+GRZEG√ìRZKI
+DƒÖbie
+Grzeg√≥rzki
 Kazimierz
 Olsza
 Osiedle Oficerskie
-Weso≥a
+Weso≈Ça
 
-PR•DNIK CZERWONY
+PRƒÑDNIK CZERWONY
 Olsza
 Olsza II
-Prπdnik Czerwony
+PrƒÖdnik Czerwony
 Rakowice
-åliczna
+≈öliczna
 Ugorek
 Wieczysta
 Osiedle Gotyk
 
-PR•DNIK BIA£Y
+PRƒÑDNIK BIA≈ÅY
 Azory
 Bronowice Wielkie
-GÛrka Narodowa
-GÛrka Narodowa WschÛd
-GÛrka Narodowa ZachÛd
-Osiedle Krowodrza GÛrka
+G√≥rka Narodowa
+G√≥rka Narodowa Wsch√≥d
+G√≥rka Narodowa Zach√≥d
+Osiedle Krowodrza G√≥rka
 Osiedle Witkowice Nowe
-Prπdnik Bia≥y
+PrƒÖdnik Bia≈Çy
 Tonie
 Witkowice
-Øabiniec
+≈ªabiniec
 
 KROWODRZA
-Cichy Kπcik
-Czarna Wieú
+Cichy KƒÖcik
+Czarna Wie≈õ
 Krowodrza
-£obzÛw
+≈Åobz√≥w
 Miasteczko Studenckie AGH
-Nowa Wieú
+Nowa Wie≈õ
 
 BRONOWICE:
 Bronowice
-Bronowice Ma≥e
+Bronowice Ma≈Çe
 Mydlniki
 Osiedle
 Bronowice Nowe
@@ -58,28 +58,28 @@ Osiedle Widok Zarzecze
 
 ZWIERZYNIEC
 Bielany
-Che≥m
+Che≈Çm
 Olszanica
-PÛ≥wsie Zwierzynieckie
-Przegorza≥y
+P√≥≈Çwsie Zwierzynieckie
+Przegorza≈Çy
 Wola Justowska
 Zwierzyniec
 Salwator
 Zakamycze
 
-D BNIKI
-BodzÛw
-DÍbniki
+DƒòBNIKI
+Bodz√≥w
+Dƒôbniki
 Kobierzyn
-Ko≥o Tynieckie
+Ko≈Ço Tynieckie
 Kostrze
-LudwinÛw
-PodgÛrki Tynieckie
+Ludwin√≥w
+Podg√≥rki Tynieckie
 Pychowice
 Sidzina
 Skotniki
 Tyniec
-ZakrzÛwek
+Zakrz√≥wek
 Kapelanka
 Kliny Zacisze
 Mochnaniec
@@ -92,11 +92,11 @@ Osiedle Proins
 Osiedle Ruczaj
 Osiedle Ruczaj-Zaborze
 
-£AGIEWNIKI - BOREK FA£ CKI
-Borek Fa≥Ícki
-£agiewniki
+≈ÅAGIEWNIKI - BOREK FA≈ÅƒòCKI
+Borek Fa≈Çƒôcki
+≈Åagiewniki
 Osiedle Cegielniana
-Osiedle Zau≥ek Jugowicki
+Osiedle Zau≈Çek Jugowicki
 
 SWOSZOWICE
 Osiedle Uzdrowisko Swoszowice
@@ -106,53 +106,53 @@ Jugowice
 Kliny Borkowskie
 Kosocice
 Lusina
-£ysa GÛra
+≈Åysa G√≥ra
 Opatkowice
 Rajsko
-Siarczana GÛra
+Siarczana G√≥ra
 Soboniowice
-WrÛblowice
+Wr√≥blowice
 Zbydniowice
 
-PODG”RZE DUCHACKIE
-KurdwanÛw
-KurdwanÛw Nowy
+PODG√ìRZE DUCHACKIE
+Kurdwan√≥w
+Kurdwan√≥w Nowy
 Osiedle Piaski Nowe
 Osiedle Podlesie
 Piaski Wielkie
 Wola Duchacka
-Wola Duchacka WschÛd
-Wola Duchacka ZachÛd
+Wola Duchacka Wsch√≥d
+Wola Duchacka Zach√≥d
 
-BIEØAN”W - PROKOCIM
-BieøanÛw
-BieøanÛw Kolonia
+BIE≈ªAN√ìW - PROKOCIM
+Bie≈ºan√≥w
+Bie≈ºan√≥w Kolonia
 Kaim
-£azy
-Osiedle BieøanÛw Nowy
+≈Åazy
+Osiedle Bie≈ºan√≥w Nowy
 Osiedle Kolejowe
-Osiedle MedykÛw
-Osiedle Na Koz≥Ûwce
+Osiedle Medyk√≥w
+Osiedle Na Koz≈Ç√≥wce
 Osiedle Nad Potokiem
 Osiedle Parkowe
 Osiedle Nowy Prokocim
-Osiedle Z≥ocieÒ
+Osiedle Z≈Çocie≈Ñ
 Prokocim
-Røπka
+R≈ºƒÖka
 
-PODG”RZE
-£utnia
+PODG√ìRZE
+≈Åutnia
 Mateczny
-P≥aszÛw
-PodgÛrze
-PrzewÛz
+P≈Çasz√≥w
+Podg√≥rze
+Przew√≥z
 Rybitwy
-Zab≥ocie
+Zab≈Çocie
 
-CZYØYNY
-Czyøyny
-£Íg
-Osiedle 2 Pu≥ku Lotniczego
+CZY≈ªYNY
+Czy≈ºyny
+≈Åƒôg
+Osiedle 2 Pu≈Çku Lotniczego
 Osiedle Akademickie
 Osiedle Dywizjonu 303
 
@@ -160,73 +160,73 @@ MISTRZEJOWICE
 Batowice
 Dziekanowice
 Mistrzejowice
-Osiedle BohaterÛw Wrzeúnia
-Osiedle KombatantÛw
+Osiedle Bohater√≥w Wrze≈õnia
+Osiedle Kombatant√≥w
 Osiedle Mistrzejowice Nowe
-Osiedle Oúwiecenia
-Osiedle PiastÛw
-Osiedle Srebrnych Or≥Ûw
-Osiedle Tysiπclecia
-Osiedle Z≥otego Wieku
+Osiedle O≈õwiecenia
+Osiedle Piast√≥w
+Osiedle Srebrnych Or≈Ç√≥w
+Osiedle TysiƒÖclecia
+Osiedle Z≈Çotego Wieku
 
-BIE—CZYCE
-BieÒczyce
-Osiedle AlbertyÒskie
-Osiedle JagielloÒskie
+BIE≈ÉCZYCE
+Bie≈Ñczyce
+Osiedle Alberty≈Ñskie
+Osiedle Jagiello≈Ñskie
 Osiedle Kalinowe
 Osiedle Kazimierzowskie
-Osiedle Koúciuszkowskie
+Osiedle Ko≈õciuszkowskie
 Osiedle Na Lotnisku
-Osiedle Niepodleg≥oúci
+Osiedle Niepodleg≈Ço≈õci
 Osiedle Przy Arce
 Osiedle Strusia
 Osiedle Wysokie
-Osiedle Z≥otej Jesieni
+Osiedle Z≈Çotej Jesieni
 
-WZG”RZA KRZES£AWICKIE
-GrÍba≥Ûw
+WZG√ìRZA KRZES≈ÅAWICKIE
+Grƒôba≈Ç√≥w
 Kantorowice
-Krzes≥awice
+Krzes≈Çawice
 Lubocza
-£uczanowice
-D≥ubnia (KrakÛw)
+≈Åuczanowice
+D≈Çubnia (Krak√≥w)
 Osiedle Na Stoku
-Osiedle Na WzgÛrzach
-WadÛw
-WÍgrzynowice
-Zes≥awice
+Osiedle Na Wzg√≥rzach
+Wad√≥w
+Wƒôgrzynowice
+Zes≈Çawice
 
 NOWA HUTA
-B≥onie
+B≈Çonie
 Branice
 Osiedle Centrum A
 Osiedle Centrum B
 Osiedle Centrum C
 Osiedle Centrum D
 Osiedle Centrum E
-Cha≥upki
-Cha≥upki GÛrne
-C≥o
-GÛrka Koúcielnicka
+Cha≈Çupki
+Cha≈Çupki G√≥rne
+C≈Ço
+G√≥rka Ko≈õcielnicka
 Holendry
 Kopaniny
-Koúcielniki
+Ko≈õcielniki
 Kujawy
-Mogi≥a
+Mogi≈Ça
 Nowa Huta
-Nowa Wieú
-Osiedle GÛrali
+Nowa Wie≈õ
+Osiedle G√≥rali
 Osiedle Handlowe
 Osiedle Hutnicze
 Osiedle Kolorowe
-Osiedle KrakowiakÛw
+Osiedle Krakowiak√≥w
 Osiedle Lesisko
-Osiedle M≥odoúci
+Osiedle M≈Çodo≈õci
 Osiedle Na Skarpie
 Osiedle Ogrodowe
-Osiedle S≥oneczne
+Osiedle S≈Çoneczne
 Osiedle Sportowe
-Osiedle SpÛ≥dzielcze
+Osiedle Sp√≥≈Çdzielcze
 Osiedle Stalowe
 Osiedle Szklane Domy
 Osiedle Szkolne
@@ -236,13 +236,13 @@ Osiedle Wandy
 Osiedle Willowe
 Osiedle Zgody
 Osiedle Zielone
-Piekie≥ko
-PleszÛw
+Piekie≈Çko
+Plesz√≥w
 Przylasek Rusiecki
-Przylasek Wyciπski
+Przylasek WyciƒÖski
 Ruszcza
-StryjÛw
+Stryj√≥w
 Wola Rusiecka
 Wolica
-WrÛøenice
-Wyciπøe 
+Wr√≥≈ºenice
+WyciƒÖ≈ºe 
