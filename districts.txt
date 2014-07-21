@@ -14,7 +14,7 @@ Dąbie
 Grzegórzki
 Kazimierz
 Olsza
-Osiedle Oficerskie
+Oficerskie
 Wesoła
 
 PRĄDNIK CZERWONY
@@ -33,8 +33,8 @@ Bronowice Wielkie
 Górka Narodowa
 Górka Narodowa Wschód
 Górka Narodowa Zachód
-Osiedle Krowodrza Górka
-Osiedle Witkowice Nowe
+Krowodrza Górka
+Witkowice Nowe
 Prądnik Biały
 Tonie
 Witkowice
@@ -48,13 +48,12 @@ Krowodrza
 Miasteczko Studenckie AGH
 Nowa Wieś
 
-BRONOWICE:
+BRONOWICE
 Bronowice
 Bronowice Małe
 Mydlniki
-Osiedle
 Bronowice Nowe
-Osiedle Widok Zarzecze
+Widok Zarzecze
 
 ZWIERZYNIEC
 Bielany
@@ -96,10 +95,10 @@ Osiedle Ruczaj-Zaborze
 Borek Fałęcki
 Łagiewniki
 Osiedle Cegielniana
-Osiedle Zaułek Jugowicki
+Zaułek Jugowicki
 
 SWOSZOWICE
-Osiedle Uzdrowisko Swoszowice
+Uzdrowisko Swoszowice
 Bania
 Barycz
 Jugowice
@@ -117,8 +116,8 @@ Zbydniowice
 PODGÓRZE DUCHACKIE
 Kurdwanów
 Kurdwanów Nowy
-Osiedle Piaski Nowe
-Osiedle Podlesie
+Piaski Nowe
+Podlesie
 Piaski Wielkie
 Wola Duchacka
 Wola Duchacka Wschód
@@ -129,13 +128,13 @@ Bieżanów
 Bieżanów Kolonia
 Kaim
 Łazy
-Osiedle Bieżanów Nowy
+Bieżanów Nowy
 Osiedle Kolejowe
 Osiedle Medyków
-Osiedle Na Kozłówce
+Na Kozłówce
 Osiedle Nad Potokiem
 Osiedle Parkowe
-Osiedle Nowy Prokocim
+Nowy Prokocim
 Osiedle Złocień
 Prokocim
 Rżąka
@@ -152,9 +151,9 @@ Zabłocie
 CZYŻYNY
 Czyżyny
 Łęg
-Osiedle 2 Pułku Lotniczego
-Osiedle Akademickie
-Osiedle Dywizjonu 303
+2 Pułku Lotniczego
+Akademickie
+Dywizjonu 303
 
 MISTRZEJOWICE
 Batowice
@@ -162,7 +161,7 @@ Dziekanowice
 Mistrzejowice
 Osiedle Bohaterów Września
 Osiedle Kombatantów
-Osiedle Mistrzejowice Nowe
+Mistrzejowice Nowe
 Osiedle Oświecenia
 Osiedle Piastów
 Osiedle Srebrnych Orłów
@@ -189,9 +188,9 @@ Kantorowice
 Krzesławice
 Lubocza
 Łuczanowice
-Dłubnia (Kraków)
-Osiedle Na Stoku
-Osiedle Na Wzgórzach
+Dłubnia 
+Na Stoku
+Na Wzgórzach
 Wadów
 Węgrzynowice
 Zesławice
@@ -199,11 +198,11 @@ Zesławice
 NOWA HUTA
 Błonie
 Branice
-Osiedle Centrum A
-Osiedle Centrum B
-Osiedle Centrum C
-Osiedle Centrum D
-Osiedle Centrum E
+Centrum A
+Centrum B
+Centrum C
+Centrum D
+Centrum E
 Chałupki
 Chałupki Górne
 Cło
