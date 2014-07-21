@@ -1,0 +1,248 @@
+STARE MIASTO
+Kazimierz
+Kleparz
+Nowe Miasto
+Nowy Œwiat
+Piasek
+Stare Miasto
+Stradom
+Warszawskie
+Wawel
+
+GRZEGÓRZKI
+D¹bie
+Grzegórzki
+Kazimierz
+Olsza
+Osiedle Oficerskie
+Weso³a
+
+PR¥DNIK CZERWONY
+Olsza
+Olsza II
+Pr¹dnik Czerwony
+Rakowice
+Œliczna
+Ugorek
+Wieczysta
+Osiedle Gotyk
+
+PR¥DNIK BIA£Y
+Azory
+Bronowice Wielkie
+Górka Narodowa
+Górka Narodowa Wschód
+Górka Narodowa Zachód
+Osiedle Krowodrza Górka
+Osiedle Witkowice Nowe
+Pr¹dnik Bia³y
+Tonie
+Witkowice
+¯abiniec
+
+KROWODRZA
+Cichy K¹cik
+Czarna Wieœ
+Krowodrza
+£obzów
+Miasteczko Studenckie AGH
+Nowa Wieœ
+
+BRONOWICE:
+Bronowice
+Bronowice Ma³e
+Mydlniki
+Osiedle
+Bronowice Nowe
+Osiedle Widok Zarzecze
+
+ZWIERZYNIEC
+Bielany
+Che³m
+Olszanica
+Pó³wsie Zwierzynieckie
+Przegorza³y
+Wola Justowska
+Zwierzyniec
+Salwator
+Zakamycze
+
+DÊBNIKI
+Bodzów
+Dêbniki
+Kobierzyn
+Ko³o Tynieckie
+Kostrze
+Ludwinów
+Podgórki Tynieckie
+Pychowice
+Sidzina
+Skotniki
+Tyniec
+Zakrzówek
+Kapelanka
+Kliny Zacisze
+Mochnaniec
+Osiedle Europejskie
+Osiedle Interbud
+Osiedle Kolejowe
+Osiedle Panorama
+Osiedle Podwawelskie
+Osiedle Proins
+Osiedle Ruczaj
+Osiedle Ruczaj-Zaborze
+
+£AGIEWNIKI - BOREK FA£ÊCKI
+Borek Fa³êcki
+£agiewniki
+Osiedle Cegielniana
+Osiedle Zau³ek Jugowicki
+
+SWOSZOWICE
+Osiedle Uzdrowisko Swoszowice
+Bania
+Barycz
+Jugowice
+Kliny Borkowskie
+Kosocice
+Lusina
+£ysa Góra
+Opatkowice
+Rajsko
+Siarczana Góra
+Soboniowice
+Wróblowice
+Zbydniowice
+
+PODGÓRZE DUCHACKIE
+Kurdwanów
+Kurdwanów Nowy
+Osiedle Piaski Nowe
+Osiedle Podlesie
+Piaski Wielkie
+Wola Duchacka
+Wola Duchacka Wschód
+Wola Duchacka Zachód
+
+BIE¯ANÓW - PROKOCIM
+Bie¿anów
+Bie¿anów Kolonia
+Kaim
+£azy
+Osiedle Bie¿anów Nowy
+Osiedle Kolejowe
+Osiedle Medyków
+Osiedle Na Koz³ówce
+Osiedle Nad Potokiem
+Osiedle Parkowe
+Osiedle Nowy Prokocim
+Osiedle Z³ocieñ
+Prokocim
+R¿¹ka
+
+PODGÓRZE
+£utnia
+Mateczny
+P³aszów
+Podgórze
+Przewóz
+Rybitwy
+Zab³ocie
+
+CZY¯YNY
+Czy¿yny
+£êg
+Osiedle 2 Pu³ku Lotniczego
+Osiedle Akademickie
+Osiedle Dywizjonu 303
+
+MISTRZEJOWICE
+Batowice
+Dziekanowice
+Mistrzejowice
+Osiedle Bohaterów Wrzeœnia
+Osiedle Kombatantów
+Osiedle Mistrzejowice Nowe
+Osiedle Oœwiecenia
+Osiedle Piastów
+Osiedle Srebrnych Or³ów
+Osiedle Tysi¹clecia
+Osiedle Z³otego Wieku
+
+BIEÑCZYCE
+Bieñczyce
+Osiedle Albertyñskie
+Osiedle Jagielloñskie
+Osiedle Kalinowe
+Osiedle Kazimierzowskie
+Osiedle Koœciuszkowskie
+Osiedle Na Lotnisku
+Osiedle Niepodleg³oœci
+Osiedle Przy Arce
+Osiedle Strusia
+Osiedle Wysokie
+Osiedle Z³otej Jesieni
+
+WZGÓRZA KRZES£AWICKIE
+Grêba³ów
+Kantorowice
+Krzes³awice
+Lubocza
+£uczanowice
+D³ubnia (Kraków)
+Osiedle Na Stoku
+Osiedle Na Wzgórzach
+Wadów
+Wêgrzynowice
+Zes³awice
+
+NOWA HUTA
+B³onie
+Branice
+Osiedle Centrum A
+Osiedle Centrum B
+Osiedle Centrum C
+Osiedle Centrum D
+Osiedle Centrum E
+Cha³upki
+Cha³upki Górne
+C³o
+Górka Koœcielnicka
+Holendry
+Kopaniny
+Koœcielniki
+Kujawy
+Mogi³a
+Nowa Huta
+Nowa Wieœ
+Osiedle Górali
+Osiedle Handlowe
+Osiedle Hutnicze
+Osiedle Kolorowe
+Osiedle Krakowiaków
+Osiedle Lesisko
+Osiedle M³odoœci
+Osiedle Na Skarpie
+Osiedle Ogrodowe
+Osiedle S³oneczne
+Osiedle Sportowe
+Osiedle Spó³dzielcze
+Osiedle Stalowe
+Osiedle Szklane Domy
+Osiedle Szkolne
+Osiedle Teatralne
+Osiedle Urocze
+Osiedle Wandy
+Osiedle Willowe
+Osiedle Zgody
+Osiedle Zielone
+Piekie³ko
+Pleszów
+Przylasek Rusiecki
+Przylasek Wyci¹ski
+Ruszcza
+Stryjów
+Wola Rusiecka
+Wolica
+Wró¿enice
+Wyci¹¿e 
