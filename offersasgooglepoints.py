@@ -25,7 +25,8 @@ class OffersAsGooglePointsComposer:
     @staticmethod
     def composeOffersByAddresses(items):
         streetExtractor = AddressExtractor("streets.txt")
-
+        districtExtractor = AddressExtractor("districts.txt")
+        
         addresses = {}
         for offer in items:
             title = offer["title"]
@@ -37,19 +38,25 @@ class OffersAsGooglePointsComposer:
             imageUrl = offer["imageUrl"]
             url = offer["url"]
 
+            # this is the first place to speedup; longers from 4 -> 10 sec/25offer
             address = streetExtractor.extract(addressSection, title, summary)
 
+            if (not address):
+                address = districtExtractor.extract(addressSection, title, summary)
+                
             #not found
             if (not address):
                 address = "Krakow"
 
+            
             print "----------------------------------"
-            print title
-            print addressSection
-            print summary
-            print address
-            print url
-        
+            print "Title\n", title
+            print "Given address\n",addressSection
+            print "Summary\n",summary
+            print "Extracted address\n",address
+            #print url
+            print ""
+            
       
             # no offer list at such address? create one
             if (address not in addresses):
@@ -66,7 +73,7 @@ class OffersAsGooglePointsComposer:
            
                      
                         
-            print ""
+           
         return addresses
             
     @staticmethod
@@ -78,6 +85,7 @@ class OffersAsGooglePointsComposer:
             hint = OffersAsGooglePointsComposer.prepareHintHeader(address)
             lon, latt = Geocoder.getCoordinates(address + ", Krakow, Polska")
 
+            # there can be many offers at single address eg many flats on one street
             for offer in addresses[address]:
                 addressSection = offer["addressSection"]
                 title = offer["title"]
