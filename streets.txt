@@ -480,7 +480,7 @@ Pylna
 Racławicka
 Władysława Raczkiewicza
 Feliksa Radwańskiego
-Eljasza Walerego Radzikowskiego
+Radzikowskiego
 Mikołaja Reja
 Henryka Reymana
 Władysława Stanisława Reymonta
@@ -2633,7 +2633,7 @@ Nowa
 pl. Jana Nowaka-Jeziorańskiego
 pl. Nowy
 pl. Nowy Kleparz
-płk. Francesco Nullo
+Nullo
 Ryszarda Nuszkiewicza
 Ofiar Dąbia
 Ogrodnicza
@@ -2733,7 +2733,7 @@ Ignacego Jana Skorupki
 Skrzatów
 Sławkowska
 Mariana Słoneckiego
-Juliusza Słowackiego
+Słowackiego
 Słowiańska
 Smocza
 Smoleńsk
