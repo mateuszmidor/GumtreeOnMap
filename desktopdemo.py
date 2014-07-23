@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
-import time
 import timeit
 
 from offersasgooglepoints import OffersAsGooglePointsComposer
@@ -19,13 +18,6 @@ def getGoogleMapForKrakow():
     gmap.setZoom(KRAKOW_PRETTY_ZOOM)
     return gmap
 
-def fetchOffers(querry, numPages = 1):
-    offers = []
-    for i in range(numPages):
-        offers += querryoffersource.getOffers(querry + str(i+1))
-
-    return offers
-
 def saveMapAsHtmlPage(gmap, filename):
     outputHtmlFilename = filename
     with open(outputHtmlFilename,'wb') as f:
@@ -40,8 +32,8 @@ def run():
     
 
     print "Fetching offers"
-    querry = gumtreequerrybuilder.build(city='Krakow' )
-    offers = fetchOffers(querry, 1)
+    querry = gumtreequerrybuilder.build(city='Krakow', minPrice='2000' )
+    offers = querryoffersource.getOffers(querry, 49)
 
     print "Composing offers to points on map"
     points = OffersAsGooglePointsComposer.compose(offers)
