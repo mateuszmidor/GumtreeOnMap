@@ -1,5 +1,3 @@
-from addressextractor import AddressExtractor
-from geocoder import Geocoder
 import datetime
 class OffersAsGooglePointsComposer:
 
@@ -24,31 +22,24 @@ class OffersAsGooglePointsComposer:
 
     @staticmethod
     def composeOffersByAddresses(items):
-        streetExtractor = AddressExtractor("streets.txt")
-        districtExtractor = AddressExtractor("districts.txt")
+
         
         addresses = {}
         for offer in items:
             title = offer["title"]
             date = offer["date"]
             price = offer["price"]
-            addressSection = offer["address"]
+            addressSection = offer["addressSection"]
+            address = offer["address"]
+            lonlat = offer["lonlat"][0]
             summary = offer["summary"]
             description = offer["description"]
             imageUrl = offer["imageUrl"]
             url = offer["url"]
 
-            # this is the first place to speedup; longers from 4 -> 10 sec/25offer
-            address = streetExtractor.extract(addressSection, title, summary)
 
-            if (not address):
-                address = districtExtractor.extract(addressSection, title, summary)
-                
-            #not found
-            if (not address):
-                address = "Krakow"
 
-            
+            """
             print "----------------------------------"
             print "Title\n", title
             print "Given address\n",addressSection
@@ -57,13 +48,14 @@ class OffersAsGooglePointsComposer:
             #print url
             print ""
             
-      
+      """
             # no offer list at such address? create one
             if (address not in addresses):
                 addresses[address] = []
-
+            
             # append offer at this address
             addresses[address].append({"addressSection" : addressSection,
+                                       "lonlat" : lonlat,
                                        "summary" : summary,
                                        "title" :  title,
                                        "date" : date,
@@ -83,7 +75,6 @@ class OffersAsGooglePointsComposer:
         points = []
         for address in addresses:
             hint = OffersAsGooglePointsComposer.prepareHintHeader(address)
-            lon, latt = Geocoder.getCoordinates(address + ", Krakow, Polska")
 
             # there can be many offers at single address eg many flats on one street
             for offer in addresses[address]:
@@ -94,7 +85,7 @@ class OffersAsGooglePointsComposer:
                 link = offer["link"]
                 summary = offer["summary"]
                 hint = hint + OffersAsGooglePointsComposer.prepareHintBody(title, date, price, addressSection, summary, link)
-
+                lon, latt =   offer["lonlat"]
             iconName = OffersAsGooglePointsComposer.getIconForDate(date)
             point = [lon, latt, hint, iconName]
             points.append(point)

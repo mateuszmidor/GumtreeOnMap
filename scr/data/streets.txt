@@ -254,8 +254,8 @@ Franciszka Kowalskiego
 Koziarówka
 Krakusów
 Krańcowa
-Zygmunta Krasińskiego
-Józefa Ignacego Kraszewskiego
+Krasińskiego
+Kraszewskiego
 Kręta
 Kronikarza Galla
 Krowoderskich Zuchów
@@ -2540,7 +2540,6 @@ pl. Juliusza Kossaka
 Kosynierów
 Kotlarska
 Krakowska
-Zygmunta Krasińskiego
 Kremerowska
 Krowoderska
 Krótka

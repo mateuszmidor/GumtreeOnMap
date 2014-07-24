@@ -2,15 +2,16 @@
 
 import threading
 import Queue
+import time
 
 import gumtreeofferparser as parser
 from addressextractor import AddressExtractor
 from geocoder import Geocoder
-from offerlinksprovider import OfferLinksProvider
 from urlfetcher import UrlFetcher
+from offerlinksprovider import OfferLinksProvider
 
-streetExtractor = AddressExtractor("streets.txt")
-districtExtractor = AddressExtractor("districts.txt")
+streetExtractor = AddressExtractor("data/streets.txt")
+districtExtractor = AddressExtractor("data/districts.txt")
 
     
 class OfferFetcher(threading.Thread):
@@ -83,6 +84,7 @@ def getOffers(gumtreeQuerry, numOffers):
     while (not outQueue.empty()):
         offer = outQueue.get()
         lonlat =  Geocoder.getCoordinates(offer["address"] + ", Krakow, Polska")
+        time.sleep(0.1)
         offer["lonlat"] = lonlat,
         offers.append(offer)
         

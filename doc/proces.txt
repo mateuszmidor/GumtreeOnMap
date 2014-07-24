@@ -1,0 +1,5 @@
+1. pobrac liste url do interesuj¹cych usera ofert (czyli filtry na max cene, liczbe pokojów, powierzchnie)
+2. zamienic lista url -> lista ofert (tytu³, opis, cena, data, link do oferty, adres)
+3. zamieniæ lista ofert -> lista punktów (adres - oferty pod tym adresem)
+4. wrzucic adresy na mape
+5. wygenerowaæ html z map¹ z naniesionymi punktami-ofertami

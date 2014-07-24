@@ -30,10 +30,10 @@ def run():
     directory = os.path.dirname(os.path.realpath(sys.argv[0]))
     filename = os.path.join(directory, 'OfferMap.html') 
     
+    querry = gumtreequerrybuilder.build(city='Krakow' )
 
     print "Fetching offers"
-    querry = gumtreequerrybuilder.build(city='Krakow', minPrice='2000' )
-    offers = querryoffersource.getOffers(querry, 49)
+    offers = querryoffersource.getOffers(querry, 27)
 
     print "Composing offers to points on map"
     points = OffersAsGooglePointsComposer.compose(offers)

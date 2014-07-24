@@ -1,4 +1,0 @@
-PythonStudy
-===========
-
-For studying Python
