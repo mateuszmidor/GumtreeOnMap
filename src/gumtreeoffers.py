@@ -37,11 +37,13 @@ class GumtreeOffers():
         return offers
                     
     @staticmethod
-    def addAddressToEachOffer(offers):
+    def addAddressToEachOffer(offers, city):
         offersWithAddress = []
         for offer in offers:
             offerWithAddress = dict(offer) # make a copy not to affect original offer
-            offerWithAddress['address'] = AddressResolver.resolve("Krakow",
+            
+            # lets try to find more accurate address than only the supplied city name
+            offerWithAddress['address'] = AddressResolver.resolve(city,
                                                                   offer["addressSection"],
                                                                   offer["title"],
                                                                   offer["summary"]) 
@@ -61,8 +63,8 @@ class GumtreeOffers():
     
     @staticmethod 
     def askForOffers(gumtreeQuerry, count, documentFetcher = UrlFetcher, geocoder = Geocoder):
-        offers = GumtreeOffers.fetchOffers(gumtreeQuerry, count, documentFetcher)
-        offers = GumtreeOffers.addAddressToEachOffer(offers)
+        offers = GumtreeOffers.fetchOffers(str(gumtreeQuerry), count, documentFetcher)
+        offers = GumtreeOffers.addAddressToEachOffer(offers, gumtreeQuerry.city)
         offers = GumtreeOffers.addGeocoordsToEachOffer(offers, geocoder)
         return offers   
    
