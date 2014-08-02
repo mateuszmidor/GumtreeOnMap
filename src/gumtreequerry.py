@@ -3,20 +3,38 @@ class GumtreeQuerry:
     
     @staticmethod
     def compose(city = "", whereabouts = "", numRooms = "", minPrice = "", maxPrice = "", minArea = "", maxArea = ""):
+        return GumtreeQuerry(city, whereabouts, numRooms, minPrice, maxPrice, minArea, maxArea)
+
+    def __init__(self, city, whereabouts, numRooms, minPrice, maxPrice, minArea, maxArea):
         # city is obligatory
         if (not city):
             raise ValueError("city is obligatory to compose a valid querry")
         
+        self.city = city
+        self.whereabouts = whereabouts
+        self.numRooms = numRooms
+        self.minPrice = minPrice
+        self.maxPrice = maxPrice
+        self.minArea = minArea
+        self.maxArea = maxArea
+        
+    def asUrlString(self):
         # ensure spaces are encoded as '+'signs
         # whereabouts is an address element, not param, so must end with '/' if provided
+        whereabouts = self.whereabouts
         if (whereabouts != ""):
             whereabouts = whereabouts.replace(' ', '+') + '/'
             
         # gumtree encodes one room as '10'
+        numRooms = self.numRooms
         if (numRooms == "1"):
             numRooms = "10" 
         
-        querry = GumtreeQuerry.__TEMPLATE.format(_city = city, _whereabouts = whereabouts, _numRooms = numRooms, 
-                                               _minPrice = minPrice, _maxPrice = maxPrice, _minArea = minArea, 
-                                               _maxArea = maxArea)
+        querry = GumtreeQuerry.__TEMPLATE.format(_city = self.city, _whereabouts = whereabouts, _numRooms = numRooms, 
+                                               _minPrice = self.minPrice, _maxPrice = self.maxPrice, _minArea = self.minArea, 
+                                               _maxArea = self.maxArea)
+        
         return querry
+    
+    def __str__(self):
+        return self.asUrlString()
