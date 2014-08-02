@@ -14,7 +14,8 @@ class AddressExtractor:
                     addresses.append(address)           
 
         # longest first - for 'find' to match Krakowska before Krakow
-        addresses.sort(lambda s1, s2: cmp(len(s2), len(s1)))
+        longToShort = lambda s1, s2: cmp(len(s2), len(s1))
+        addresses.sort(longToShort)
         return addresses
 
     def __init__(self, addressesFilename):
@@ -30,7 +31,7 @@ class AddressExtractor:
            
                 if (source.find(address)) != -1:
                     # can be followed by a number
-                    f = re.search(address + r"\s*\d*", source)
+                    f = re.search(address + r"[ \t]*\d*", source)
                     if (f):
                         return f.group(0)
         

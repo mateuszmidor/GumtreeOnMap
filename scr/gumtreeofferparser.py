@@ -29,7 +29,8 @@ def extractAddress(offerHtml):
     START_TAG = u'<td itemscope itemtype="http://schema.org/Place">'
     STOP_TAG = u'</td>'
     address = getStringBetween(offerHtml, START_TAG, STOP_TAG)
-    return stripTextFromHtmlTags(address)
+    address = address.replace(u"Pokaż mapę", "")
+    return stripTextFromHtmlTags(address).strip()
 
 def extractDescription(offerHtml):
     START_TAG = '<span id="preview-local-desc">'
@@ -38,9 +39,10 @@ def extractDescription(offerHtml):
     return stripTextFromHtmlTags(desciption)
 
 def extractSummary(offerHtml):
-    START_TAG = '<meta property="og:description" content="'
+    START_TAG = 'property="og:description" content="'
     STOP_TAG = '"/>'
-    return getStringBetween(offerHtml, START_TAG, STOP_TAG)
+    summary = getStringBetween(offerHtml, START_TAG, STOP_TAG)
+    return stripTextFromHtmlTags(summary)
 
 def extractImageUrl(offerHtml):
     START_TAG = '<meta property="og:image" content="'

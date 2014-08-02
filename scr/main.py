@@ -12,7 +12,7 @@ from offersasgooglepoints import OffersAsGooglePointsComposer
 from geocoder import Geocoder
 from googlemap import GoogleMap
 import querryoffersource
-import gumtreequerrybuilder
+import gumtreequerry
 
 def getGoogleMapForKrakow():
 
@@ -29,14 +29,14 @@ def run():
 
     gmap = getGoogleMapForKrakow()
     args = cgi.FieldStorage()
-    querry = gumtreequerrybuilder.build(city='Krakow', whereabouts=args.getvalue("whereabouts", ""),
+    querry = gumtreequerry.build(city='Krakow', whereabouts=args.getvalue("whereabouts", ""),
                                       numRooms=args.getvalue("numrooms", ""),
                                       minPrice=args.getvalue("minprice", ""),
                                       maxPrice=args.getvalue("maxprice", ""),
                                       minArea=args.getvalue("minarea", ""),
                                       maxArea=args.getvalue("maxarea", ""))
 
-    offers = querryoffersource.getOffers(querry, int(args.getvalue("limit", 25)))
+    offers = querryoffersource.getUrls(querry, int(args.getvalue("limit", 25)))
     points = OffersAsGooglePointsComposer.compose(offers)
     gmap.addPoints(points)
     renderHtmlPage(gmap)

@@ -1,31 +1,30 @@
-﻿'''
-Created on 23-07-2014
-
-@author: mateusz
-'''
-
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: UTF-8 -*-
 
 import re
 from urlfetcher import UrlFetcher
 
-class OfferLinksProvider:
-    def __init__(self, querry, limit):
+class GumtreeOfferUrls(object):
+    
+    @staticmethod
+    def getUrls(querry, limit, documentFetcher = UrlFetcher):
+        urls = GumtreeOfferUrls(querry, limit, documentFetcher)
+        
+        # url generator
+        while(True):
+            try:
+                yield urls.nextUrl()
+            except StopIteration:
+                return
+
+    def __init__(self, querry, limit, documentFetcher):
         self.querry = querry # gumtree querry for offer
         self.limit = limit # max number of urls to return
+        self.documentFetcher = documentFetcher # can set different fetcher eg for testing purposes
         self.currUrlNumber = 0 # current url no
         self.urls = [] # url list to return
         self.currPage = 1 # current offers page no, we start from page 1
         self.hasNextPage = True # is there a next page to fetch offers from?
-        
-    def __iter__(self):
-        return self
-    
-    def next(self):
-        url = self.nextUrl()
-        return url
-        
-        
+
     def nextUrl(self):
         # limit hit - stop iteration
         if (self.currUrlNumber == self.limit):
@@ -41,6 +40,10 @@ class OfferLinksProvider:
         # and return url
         return self.urls.pop()
         
+
+    def fetchDocument(self, url):
+        return self.documentFetcher.fetchDocument(url)
+
     def fetchUrls(self):
         # if no more pages to fetch urls from - stop iteration
         if (not self.hasNextPage):
@@ -48,7 +51,9 @@ class OfferLinksProvider:
 
         # add page number to offers querry
         offersPageUrl = "{0}&Page={1}".format(self.querry, self.currPage)
-        html = UrlFetcher.fetch(offersPageUrl)
+        
+        # fetch html with offers listed
+        html = self.fetchDocument(offersPageUrl)
         self.hasNextPage = self.getHasNextPage(html)
         self.currPage += 1
         
@@ -56,20 +61,16 @@ class OfferLinksProvider:
         
     def getHasNextPage(self, html):
         NEXT_PAGE_TAG = u'class="prevNextLink">Następne'
+        return (NEXT_PAGE_TAG in html)
         
-        if (NEXT_PAGE_TAG in html):
-            return True
-        else:
-            return False       
-        
-    def extractUrlFromHtml(self, html):
-        pattern = 'a href="([^"]*)'
+    def extractUrlFromHtmlHiperlink(self, html):
+        pattern = u'a href="([^"]*)'
         return re.search(pattern, html).group(1)
     
     def extractOfferUrls(self, html):
         START_TAG = '<div class="ar-title">'
         STOP_TAG = '</div>'
-        urls = set([])
+        urls = []
         
         iStart = html.find(START_TAG)
         while (iStart != -1):
@@ -79,8 +80,8 @@ class OfferLinksProvider:
             htmlLink = html[iStart + len(START_TAG):iStop]
     
             # http://...
-            url = self.extractUrlFromHtml(htmlLink)
-            urls.add(url)
+            url = self.extractUrlFromHtmlHiperlink(htmlLink)
+            urls.append(url)
             iStart = html.find(START_TAG, iStop)
     
         return urls
@@ -89,7 +90,7 @@ class OfferLinksProvider:
 #--------------------------- DEMO
 if (__name__ == "__main__"):
     querry = "http://www.gumtree.pl/fp-mieszkania-i-domy-do-wynajecia/krakow/ruczaj/c9008l3200208?A_ForRentBy=ownr&A_NumberRooms=2&AdType=2&maxPrice=1600&maxPriceBackend=120000"
-    for i, url in enumerate(OfferLinksProvider(querry, 27)):
+    for i, url in enumerate(GumtreeOfferUrls.getUrls(querry, 27)):
         print i + 1
         print url
         

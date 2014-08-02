@@ -8,7 +8,7 @@ import urllib3 # for thread safety, urllib2 hangs the app
 
 class UrlFetcher:
     @staticmethod
-    def fetch(url):
+    def fetchDocument(url):
         http = urllib3.PoolManager()
         r = http.request('GET', url)
         return unicode(r.data, "UTF-8")
