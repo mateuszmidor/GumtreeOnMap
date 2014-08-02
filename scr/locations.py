@@ -10,6 +10,8 @@ class Locations:
         
         locations = {}
         for offer in offers:
+            offer = dict(offer) # make a copy not to change the original offer
+            
             address = offer["address"]
             longlatt = offer["longlatt"]
             del offer["address"]
