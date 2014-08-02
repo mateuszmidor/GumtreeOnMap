@@ -10,7 +10,7 @@ from gumtreeoffers import GumtreeOffers
 class Test(unittest.TestCase):
 
     def testGetOffersLimitedToOne(self):
-        offers = GumtreeOffers.askForOffers("www.gumtree.pl/offers", 1, FakeFetcher, FakeGeocoder)
+        offers = GumtreeOffers.askForOffers(FakeQuerry(), 1, FakeFetcher, FakeGeocoder)
         self.assertEquals(1, len(offers))
         
         offer = offers[0]
@@ -19,13 +19,18 @@ class Test(unittest.TestCase):
         self.assertEquals([10.01, 50.01], offer["longlatt"]) # coords from FakeGeocoder
         
     def testGetOffers(self):
-        offers = GumtreeOffers.askForOffers("www.gumtree.pl/offers", 999, FakeFetcher, FakeGeocoder)
+        offers = GumtreeOffers.askForOffers(FakeQuerry(), 999, FakeFetcher, FakeGeocoder)
         self.assertEquals(2, len(offers))
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
   
+class FakeQuerry():
+    city = "defaultCity"
+    def __str__(self):
+        return "www.gumtree.pl/offers"
+    
 class FakeGeocoder():
     @staticmethod
     def getCoordinates(address):
