@@ -5,43 +5,68 @@ import time
 
 from geocoder import Geocoder
 from offerfetcher import OfferFetcher
+from addressresolver import AddressResolver
 from gumtreeofferurls import GumtreeOfferUrls
 
 
     
-class GumtreeOffers():   
-    @staticmethod 
-    def askForOffers(gumtreeQuerry, numOffers):
-        
+class GumtreeOffers():
+     
+    @staticmethod
+    def fetchOffers(gumtreeQuerry, count):
         inQueue = Queue.Queue()
         outQueue = Queue.Queue()
     
+        # limit by netmark.pl to maximum of 9 threads/python process
         NUM_THREADS = 8
+        
         # prepare working threads
-        for i in xrange(NUM_THREADS):
+        for i in xrange(NUM_THREADS):  # @UnusedVariable
             t = OfferFetcher(inQueue, outQueue)
             t.setDaemon(True)
             t.start()     
             
         # fetch offers in separate threads
-        for url in GumtreeOfferUrls.getUrls(gumtreeQuerry, numOffers):
+        for url in GumtreeOfferUrls.getUrls(gumtreeQuerry, count):
             inQueue.put(url)
             
-    
         # wait for all pages to be processed
-        print "Waiting for %s threads to finish processing pages..." % NUM_THREADS
         inQueue.join()
-        print "Finished"
+        
         offers = []
-    
         while (not outQueue.empty()):
-            offer = outQueue.get()
-            lonlat =  Geocoder.getCoordinates(offer["address"] + ", Krakow, Polska")
-            time.sleep(0.1)
-            offer["lonlat"] = lonlat,
-            offers.append(offer)
+            offers.append(outQueue.get())
             
+        return offers
+                    
+    @staticmethod
+    def addAddressToEachOffer(offers):
+        offersWithAddress = []
+        for offer in offers:
+            offerWithAddress = dict(offer) # make a copy not to affect original offer
+            offerWithAddress['address'] = AddressResolver.resolve(defaulAddress = "Krakow",
+                                                                  offer["addressSection"],
+                                                                  offer["title"],
+                                                                  offer["summary"]) 
+            offersWithAddress.append(offerWithAddress)
             
+        return offersWithAddress
+    
+    @staticmethod
+    def addGeocoordsToEachOffer(offers):
+        offersWithCoords = []
+        for offer in offers:
+            offerWithCoords = dict(offer) # make a copy not to affect original offer
+            offerWithCoords['longlatt'] = Geocoder.getCoordinates(offer["address"])
+            offersWithCoords.append(offer)
+            
+        return offersWithCoords
+    
+    @staticmethod 
+    def askForOffers(gumtreeQuerry, numOffers):
+        offers = GumtreeOffers.fetchOffers(gumtreeQuerry, numOffers)
+        offers = GumtreeOffers.addAddressToEachOffer(offers)
+        offers = GumtreeOffers.addGeocoordsToEachOffer(offers)
         return offers   
    
     
