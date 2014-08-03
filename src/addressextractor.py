@@ -31,7 +31,8 @@ class AddressExtractor:
            
                 if (source.find(address)) != -1:
                     # can be followed by a number
-                    f = re.search(address + r"[ \t]*\d*", source)
+                    OPTIONAL_NUMBER = r"([ ]{0,5}\d{1,5})?"
+                    f = re.search(address + OPTIONAL_NUMBER, source)
                     if (f):
                         return f.group(0)
         
