@@ -14,18 +14,10 @@ def run():
     offers = GumtreeOffers.askForOffers(querry, 20)
 
     print "Rendering the offer page"
-    DesktopView.render(offers)
+    DesktopView.render(offers, querry.city)
     
     print "Done."
     
 
 total_time = timeit.timeit(run, setup="gc.enable()", number=1)
 print "Time taken: ", total_time
-#raw_input("Press Enter to exit")
-
-
-
-
-
-
-
