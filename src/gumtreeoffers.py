@@ -62,7 +62,7 @@ class GumtreeOffers():
         return offersWithCoords
     
     @staticmethod 
-    def askForOffers(gumtreeQuerry, count, documentFetcher = UrlFetcher, geocoder = Geocoder):
+    def askForOffers(gumtreeQuerry, count, geocoder = Geocoder, documentFetcher = UrlFetcher):
         offers = GumtreeOffers.fetchOffers(str(gumtreeQuerry), count, documentFetcher)
         offers = GumtreeOffers.addAddressToEachOffer(offers, gumtreeQuerry.city)
         offers = GumtreeOffers.addGeocoordsToEachOffer(offers, geocoder)

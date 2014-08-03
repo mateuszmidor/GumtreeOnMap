@@ -1,5 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
 
+from geocoderwithcache import GeocoderWithCache
 from desktopview import DesktopView
 from gumtreequerry import GumtreeQuerry
 from gumtreeoffers import GumtreeOffers
@@ -11,7 +12,7 @@ def run():
     querry = GumtreeQuerry.compose(city='Krakow' )
 
     print "Fetching offers"
-    offers = GumtreeOffers.askForOffers(querry, 20)
+    offers = GumtreeOffers.askForOffers(querry, 20, GeocoderWithCache())
 
     print "Rendering the offer page"
     DesktopView.render(offers, querry.city)
