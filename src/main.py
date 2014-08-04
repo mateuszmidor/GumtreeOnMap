@@ -2,13 +2,10 @@
 
 # -*- coding: utf-8 -*-
 
-import sys
-import codecs
 import cgi
 import timeit
 import threading
 
-import gumtreequerry
 from gumtreequerry import GumtreeQuerry
 from geocoderwithcache import GeocoderWithCache
 from gumtreeoffers import GumtreeOffers
