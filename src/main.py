@@ -2,6 +2,8 @@
 
 # -*- coding: utf-8 -*-
 
+import setupdicontroller  # @UnusedImport
+
 import cgi
 import timeit
 import threading
