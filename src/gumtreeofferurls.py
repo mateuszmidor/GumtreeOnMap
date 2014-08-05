@@ -1,13 +1,15 @@
 ﻿# -*- coding: UTF-8 -*-
 
 import re
-from urlfetcher import UrlFetcher
+from injectdependency import InjectDependency, Inject
 
-class GumtreeOfferUrls(object):
+@InjectDependency('urlfetcher')
+class GumtreeOfferUrls():
+    urlfetcher = Inject
     
     @staticmethod
-    def getUrls(querry, limit, documentFetcher = UrlFetcher):
-        urls = GumtreeOfferUrls(querry, limit, documentFetcher)
+    def getUrls(querry, limit):
+        urls = GumtreeOfferUrls(querry, limit)
         
         # url generator
         while(True):
@@ -16,10 +18,9 @@ class GumtreeOfferUrls(object):
             except StopIteration:
                 return
 
-    def __init__(self, querry, limit, documentFetcher):
+    def __init__(self, querry, limit):
         self.querry = querry # gumtree querry for offer
         self.limit = limit # max number of urls to return
-        self.documentFetcher = documentFetcher # can set different fetcher eg for testing purposes
         self.currUrlNumber = 0 # current url no
         self.urls = [] # url list to return
         self.currPage = 1 # current offers page no, we start from page 1
@@ -34,15 +35,16 @@ class GumtreeOfferUrls(object):
         if (not self.urls):
             self.urls = self.fetchUrls()
 
+        # check if fetched any urls
+        if (not self.urls):
+            raise StopIteration()
+        
         # increase returned url counter
         self.currUrlNumber += 1
 
         # and return url
         return self.urls.pop()
         
-
-    def fetchDocument(self, url):
-        return self.documentFetcher.fetchDocument(url)
 
     def fetchUrls(self):
         # if no more pages to fetch urls from - stop iteration
@@ -53,7 +55,7 @@ class GumtreeOfferUrls(object):
         offersPageUrl = "{0}&Page={1}".format(self.querry, self.currPage)
         
         # fetch html with offers listed
-        html = self.fetchDocument(offersPageUrl)
+        html = self.urlfetcher.fetchDocument(offersPageUrl)
         self.hasNextPage = self.getHasNextPage(html)
         self.currPage += 1
         
@@ -85,12 +87,3 @@ class GumtreeOfferUrls(object):
             iStart = html.find(START_TAG, iStop)
     
         return urls
-    
-    
-#--------------------------- DEMO
-if (__name__ == "__main__"):
-    querry = "http://www.gumtree.pl/fp-mieszkania-i-domy-do-wynajecia/krakow/ruczaj/c9008l3200208?A_ForRentBy=ownr&A_NumberRooms=2&AdType=2&maxPrice=1600&maxPriceBackend=120000"
-    for i, url in enumerate(GumtreeOfferUrls.getUrls(querry, 27)):
-        print i + 1
-        print url
-        

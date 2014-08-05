@@ -3,26 +3,28 @@ Created on 30-07-2014
 
 @author: mateusz
 '''
-from urlfetcher import UrlFetcher
+from threading import Thread
 import gumtreeofferparser as Parser
-import threading
+from injectdependency import Inject, InjectDependency
 
-
-
+@InjectDependency('urlfetcher') 
+class OfferFetcher(Thread):
+    urlfetcher = Inject
     
-class OfferFetcher(threading.Thread):
-    def __init__(self, inQueue, outQueue, documentFetcher = UrlFetcher):
-        threading.Thread.__init__(self)
+    def __init__(self, inQueue, outQueue):
+        Thread.__init__(self)
         self.inQueue = inQueue
         self.outQueue = outQueue
-        self.documentFetcher = documentFetcher
 
-
-    def fetchDocument(self, url):
-        return self.documentFetcher.fetchDocument(url)
-
+    def run(self):
+        while (True): # this is ok for daemon thread
+            url = self.inQueue.get()       
+            offer = self.getOffer(url)
+            self.outQueue.put(offer)
+            self.inQueue.task_done()
+    
     def getOffer(self, url):
-        html = self.fetchDocument(url)
+        html = self.urlfetcher.fetchDocument(url)
         
         title = Parser.extractTitle(html)
         date = Parser.extractDate(html)
@@ -42,10 +44,3 @@ class OfferFetcher(threading.Thread):
                  "imageUrl" : imageUrl}
         
         return offer
-    
-    def run(self):
-        while (True):
-            url = self.inQueue.get()       
-            offer = self.getOffer(url)
-            self.outQueue.put(offer)
-            self.inQueue.task_done()

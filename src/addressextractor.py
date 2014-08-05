@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-import codecs
+
 import re
+import codecs
+
 class AddressExtractor:
     addresses = {}
+
+    def __init__(self, addressesFilename):
+        self.addresses = self.loadAddresses(addressesFilename)
 
     def loadAddresses(self, filename):
         with codecs.open(filename, encoding="utf-8") as f:
@@ -18,27 +23,16 @@ class AddressExtractor:
         addresses.sort(longToShort)
         return addresses
 
-    def __init__(self, addressesFilename):
-        self.addresses = self.loadAddresses(addressesFilename)
-
-
-    
     def extract(self, *descriptions):
         """ This function needs some speedup"""
         for source in descriptions:
             source = source.lower()
             for address in self.addresses:
-           
                 if (source.find(address)) != -1:
-                    # can be followed by a number
+                    # can be followed by spaces and a number
                     OPTIONAL_NUMBER = r"([ ]{0,5}\d{1,5})?"
                     f = re.search(address + OPTIONAL_NUMBER, source)
                     if (f):
                         return f.group(0)
         
         return None
-
-#--------------------------- DEMO
-if (__name__ == "__main__"):
-    extractor = AddressExtractor("districts.txt")
-    print extractor.extract(u"Mieszkanie Mydlniki")

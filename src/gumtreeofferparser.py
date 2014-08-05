@@ -48,6 +48,3 @@ def extractImageUrl(offerHtml):
     START_TAG = '<meta property="og:image" content="'
     STOP_TAG = '"/>'
     return getStringBetween(offerHtml, START_TAG, STOP_TAG)   
-    
-    
-    

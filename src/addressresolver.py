@@ -5,14 +5,10 @@ Created on 31-07-2014
 '''
 from addressextractor import AddressExtractor
 
-
 streetExtractor = AddressExtractor("data/streets.txt")
 districtExtractor = AddressExtractor("data/districts.txt")
 
 class AddressResolver():
-    '''
-    classdocs
-    '''
     
     # this country will be added as suffix to every returned address
     OPERATING_COUNTRY = u"polska"
@@ -36,5 +32,3 @@ class AddressResolver():
             return "%s, %s" % (cityToLookForTheAddressIn, AddressResolver.OPERATING_COUNTRY)
         else:
             return "%s, %s, %s" % (address, cityToLookForTheAddressIn, AddressResolver.OPERATING_COUNTRY)
-    
-    

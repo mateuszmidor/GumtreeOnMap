@@ -10,20 +10,20 @@ class GeocoderWithCache():
     def __init__(self, addressDict = None, geocoder=Geocoder):
         self.geocoder = geocoder
         if (addressDict):
-            self.knownAddresses = addressDict
+            self.cachedAddresses = addressDict
         else:
-            self.knownAddresses = shelve.open("data/geocodedaddresses.db")
+            self.cachedAddresses = shelve.open("data/geocodedaddresses.db")
         
     def getCoordinates(self, address):
         address = address.lower() # addresses in cache are encoded as lowercase
-        if (self.knownAddress(address)):
+        if (self.cachedAddress(address)):
             return self.getCachedCoordsForAddress(address)
         else:
             return self.geocoder.getCoordinates(address)
             
-    def knownAddress(self, address):
-        return (address in self.knownAddresses)
+    def cachedAddress(self, address):
+        return (address in self.cachedAddresses)
     
     def getCachedCoordsForAddress(self, address):
-        return self.knownAddresses[address]
+        return self.cachedAddresses[address]
         

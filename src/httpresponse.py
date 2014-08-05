@@ -7,9 +7,6 @@ from injectdependency import Inject, InjectDependency
 
 @InjectDependency('printer')
 class HttpResponse():
-    '''
-    classdocs
-    '''
     printer = Inject
     
     @staticmethod

@@ -3,8 +3,8 @@ Created on 01-08-2014
 
 @author: mateusz
 '''
-from webpagetemplate import WebPageTemplate
 import unittest
+from webpagetemplate import WebPageTemplate
 
 class Test(unittest.TestCase):
     def testSetField(self):

@@ -6,9 +6,7 @@ Created on 02-08-2014
 import unittest
 from addressresolver import AddressResolver
 
-
 class Test(unittest.TestCase):
-
 
     def testResolveStreetWithNumber(self):
         address = u"Wielicka 2, Krakow"

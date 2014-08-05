@@ -1,10 +1,12 @@
 ﻿# -*- coding: utf-8 -*-
 
-from geocoderwithcache import GeocoderWithCache
+import timeit
+
+import setupdependencyinjection  # @UnusedImport setups dependency injection
+
 from desktopview import DesktopView
 from gumtreequerry import GumtreeQuerry
 from gumtreeoffers import GumtreeOffers
-import timeit
 
 def run():
 
@@ -12,7 +14,7 @@ def run():
     querry = GumtreeQuerry.compose(city='Krakow' )
 
     print "Fetching offers"
-    offers = GumtreeOffers.askForOffers(querry, 20, GeocoderWithCache())
+    offers = GumtreeOffers.askForOffers(querry, 20)
 
     print "Rendering the offer page"
     DesktopView.render(offers, querry.city)

@@ -1,50 +1,68 @@
 ﻿'''
 Created on 02-08-2014
-
+ 
 @author: mateusz
 '''
+ 
 import unittest
+import setupdependencyinjection  # @UnusedImport configures dependency injection for tests
 from gumtreeoffers import GumtreeOffers
-
-
-class Test(unittest.TestCase):
-
-    def testGetOffersLimitedToOne(self):
-        offers = GumtreeOffers.askForOffers(FakeQuerry(), 1, FakeGeocoder, FakeFetcher)
-        self.assertEquals(1, len(offers))
-        
-        offer = offers[0]
-        self.assertTrue("address" in offer)
-        self.assertTrue("longlatt" in offer)
-        self.assertEquals([10.01, 50.01], offer["longlatt"]) # coords from FakeGeocoder
-        
-    def testGetOffers(self):
-        offers = GumtreeOffers.askForOffers(FakeQuerry(), 999, FakeGeocoder, FakeFetcher)
-        self.assertEquals(2, len(offers))
-        
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
-  
+from injectdependency import InjectDependency
+ 
+# this guy is used by GumtreeOffers.askForOffers   
 class FakeQuerry():
     city = "defaultCity"
     def __str__(self):
-        return "www.gumtree.pl/offers"
-    
-class FakeGeocoder():
+        return "www.gumtree.pl/offers" # related to OffesFetcher first url in list
+   
+# this guy is used by GumtreeOffers.askForOffers
+class GeocoderStub():
     @staticmethod
     def getCoordinates(address):
         return [10.01, 50.01]
-        
-class FakeFetcher():
-
+         
+# this guy is used by GumtreeOffers.askForOffers
+class OffesFetcher():
     @staticmethod
     def fetchDocument(url):
         documents = {"www.gumtree.pl/offers&Page=1" : OFFERS_HTML,
                      "www.gumtree.pl/offer1" : OFFER1_HTML,
                      "www.gumtree.pl/offer2" : OFFER2_HTML}
         return documents[url]
-      
+    
+# this guy is used by GumtreeOffers.askForOffers
+class AddressResolverStub(): 
+    @staticmethod
+    def resolve(cityToLookForTheAddressIn, *sources):
+        return "Krakow, Poland"
+
+class Test(unittest.TestCase):
+    def setUp(self):
+        InjectDependency.changeDependency('urlfetcher', OffesFetcher)
+        InjectDependency.changeDependency('geocoder', GeocoderStub)       
+        InjectDependency.changeDependency('addressresolver', AddressResolverStub)       
+ 
+    def testGetOffers(self):
+        UNLIMITED_COUNT = 999
+        offers = GumtreeOffers.askForOffers(FakeQuerry(), UNLIMITED_COUNT)
+        self.assertEquals(2, len(offers))
+        for offer in offers:
+            self.assertTrue("address" in offer)
+            self.assertTrue("longlatt" in offer)
+            self.assertEquals([10.01, 50.01], offer["longlatt"]) # coords from GeocoderStub            
+        
+    def testGetOffersLimitedToOne(self):
+        offers = GumtreeOffers.askForOffers(FakeQuerry(), 1)
+        self.assertEquals(1, len(offers))
+        for offer in offers:
+            self.assertTrue("address" in offer)
+            self.assertTrue("longlatt" in offer)
+            self.assertEquals([10.01, 50.01], offer["longlatt"]) # coords from GeocoderStub  
+         
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    unittest.main()
+
 # html with 2 prepared offer urls
 OFFERS_HTML = u"""
 <!DOCTYPE html PUBLIC "-//W3C//DTD PAGE_WITH_OFFER_URLS 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -868,7 +886,7 @@ Zapraszam do oglądania mieszkania.</span>
 </div>
 </div>
 </div>
-
+ 
 <!-- google_ad_section_end -->
 </table>
 <!-- google_ad_section_end -->
@@ -1128,10 +1146,10 @@ Kj.initFavoritesFunctionality({domain:'www.gumtree.pl',panelActivated:'true',sta
 </script>
 </body></html>
 """
-
+ 
 OFFER1_HTML = u"""
 <!DOCTYPE html PUBLIC "-//W3C//DTD OFFER_HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+ 
 <html xmlns="http://www.w3.org/1999/xhtml"  xmlns:fb="http://www.facebook.com/2008/fbml"> 
 <head>
 <title>Przytulne, 2 pokojowe, 35m, Ruczaj, Babińskiego</title>
@@ -2154,10 +2172,10 @@ Kj.initFavoritesFunctionality({domain:'www.gumtree.pl',panelActivated:'true',sta
 </script>
 </body></html>
 """
-
+ 
 OFFER2_HTML = u"""
 <!DOCTYPE html PUBLIC "-//W3C//DTD OFFER_HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+ 
 <html xmlns="http://www.w3.org/1999/xhtml"  xmlns:fb="http://www.facebook.com/2008/fbml"> 
 <head>
 <title>Przytulne, 2 pokojowe, 35m, Ruczaj, Babińskiego</title>

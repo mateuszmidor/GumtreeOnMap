@@ -1,36 +1,42 @@
 ﻿'''
 Created on 30-07-2014
-
+  
 @author: mateusz
 '''
 
 import unittest
+import setupdependencyinjection  # @UnusedImport setups dependency injection for tests
 from gumtreeofferurls import GumtreeOfferUrls
+from injectdependency import InjectDependency
 
-class Test(unittest.TestCase):
+# This guy is used by GumtreeOfferUrls.getUrls
+class OfferUrlsFetcher():
+    @staticmethod
+    def fetchDocument(url):
+        return PAGE_WITH_OFFER_URLS
         
+class Test(unittest.TestCase):
+    
+    def setUp(self):
+        InjectDependency.changeDependency('urlfetcher', OfferUrlsFetcher)
+         
     def testGetOfferUrls(self):
         OFFER_URLS = ["http://www.gumtree.pl/offer1",
                       "http://www.gumtree.pl/offer2",
                       "http://www.gumtree.pl/offer3"]
-         
-        for url in GumtreeOfferUrls.getUrls("http://fake.gumtree.pl/GetPageWithThreeOfferUrls", 3, UrlsPageFetcher) :
+           
+        for url in GumtreeOfferUrls.getUrls("http://PAGE_WITH_OFFER_URLS", 3) :
             self.assertTrue(url in OFFER_URLS, "Unexpected offer url fetched")
             OFFER_URLS.remove(url)
-             
+               
         self.assertEquals(0, len(OFFER_URLS), "Not all offer urls fetched")
-
-
+  
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.test']
     unittest.main()
-
-
-class UrlsPageFetcher():
-    @staticmethod
-    def fetchDocument(url):
-        return PAGE_WITH_OFFER_URLS
-    
+  
+  
+      
 # PAGE_WITH_OFFER_URLS with 3 prepared offer urls
 PAGE_WITH_OFFER_URLS = u"""
 <!DOCTYPE html PUBLIC "-//W3C//DTD PAGE_WITH_OFFER_URLS 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -886,7 +892,7 @@ Zapraszam do oglądania mieszkania.</span>
 </div>
 </div>
 </div>
-
+  
 <!-- google_ad_section_end -->
 </table>
 <!-- google_ad_section_end -->

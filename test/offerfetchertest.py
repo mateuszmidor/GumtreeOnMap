@@ -1,70 +1,75 @@
 ﻿'''
 Created on 31-07-2014
-
+ 
 @author: mateusz
 '''
 import unittest
 import Queue
 from offerfetcher import OfferFetcher
+from injectdependency import InjectDependency
 
-
-class Test(unittest.TestCase):
-
-    def testFetchOffer(self):
-        inQueue = Queue.Queue()
-        outQueue = Queue.Queue()
-    
-        #OfferPageFetcher will provide offer html
-        thread = OfferFetcher(inQueue, outQueue, OfferPageFetcher)
-        thread.setDaemon(True)
-        thread.start()
-        
-        # feed the thread with an url that it takes out from inQueue
-        FAKE_URL = "FakeUrlToOfferPage"
-        inQueue.put(FAKE_URL)
-        
-        # wait for thread to finish parsing page
-        inQueue.join()
-        
-        offer = outQueue.get()
-        self.assertTrue(outQueue.empty(), "More offers than expected fetched")
-        
-        self.assertEquals(FAKE_URL, offer["url"])
-        
-        ACTUAL_PRICE = u"Zł  950,00"
-        self.assertEquals(ACTUAL_PRICE, offer["price"])
-        
-        ACTUAL_DATE = u"29/07/2014"
-        self.assertEquals(ACTUAL_DATE, offer["date"])
-        
-        ACTUAL_TITLE = u"Przytulne, 2 pokojowe, 35m, Ruczaj, Babińskiego"
-        self.assertEquals(ACTUAL_TITLE, offer["title"])
-        
-        ACTUAL_ADDRESS_SECTION = u"Doktora Józefa Babińskiego 23, 30-393 Kraków, Polska"
-        self.assertEquals(ACTUAL_ADDRESS_SECTION, offer["addressSection"])
-        
-        ACTUAL_DESCRIPTION = u"""Do wynajęcia od zaraz 2-pokojowe mieszkanie przy ul. Babińskiego 23b ( I piętro). Mieszkanie ma 2 pokoje ( w tym 1 przechodni), kuchnie, łazienkę, przedpokój i balkon z widokiem. Okolica bardzo spokojna. Przystanek autobusowy "Babińskiego" 2 min. od bloku, przystanek "Zachodnia" 7 min. Dojazd do centrum zajmuje ok. 30 min. Do miasta można również dojeżdżać busikami jeżdżącymi ze Skawiny, jest się wówczas w okolicach centrum( busiki jeżdżą pod Dworzec lub pod Pocztę Główną) w ok. 20 min.Przed blokiem jest miejsce do parkowania. Z balkonu ładny widok, żadnych bloków na horyzoncie:) Mieszkanie przytulne, remontowane kilka lat temu. Mieszkanie w pełni wyposażone (pralka, lodówka, kuchenka, piekarnik). Nowe okna, ogrzewanie miejskie. Opłaty miesięczne to ok. 450 zł przy 2 osobach (czynsz administracyjny + prąd)."""
-        self.assertEquals(ACTUAL_DESCRIPTION, offer["description"])
-        
-        ACTUAL_SUMMARY = u"""Do wynajęcia od zaraz 2-pokojowe mieszkanie przy ul. Babińskiego 23b ( I piętro). Mieszkanie ma 2 pokoje ( w tym 1 przechodni), kuchnie, łazienkę, przedpokój i balkon z widokiem. Okolica bardzo spokojna. Przystanek autobusowy &quot;Babińskiego&quot; 2 min. od"""
-        self.assertEquals(ACTUAL_SUMMARY, offer["summary"])
-        
-        ACTUAL_URL = u"http://i.ebayimg.com/00/s/NzY4WDEwMjQ=/z/bvsAAOSwVFlT1949/$_35.JPG"
-        self.assertEquals(ACTUAL_URL, offer["imageUrl"])
-        
-
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
- 
+# this guy is used by OfferFetcher
 class OfferPageFetcher():
     @staticmethod
     def fetchDocument(url):
         return OFFER_HTML
-       
+     
+class Test(unittest.TestCase):
+    def setUp(self):
+        InjectDependency.changeDependency('urlfetcher', OfferPageFetcher)
+        
+    def testFetchOffer(self):
+        inQueue = Queue.Queue()
+        outQueue = Queue.Queue()
+     
+        #OfferPageFetcher will provide offer html
+        thread = OfferFetcher(inQueue, outQueue)
+        thread.setDaemon(True)
+        thread.start()
+         
+        # feed the thread with an url that it takes out from inQueue
+        FAKE_URL = "FakeUrlToOfferPage"
+        inQueue.put(FAKE_URL)
+         
+        # wait for thread to finish parsing page
+        inQueue.join()
+         
+        offer = outQueue.get()
+        self.assertTrue(outQueue.empty(), "More offers than expected fetched")
+         
+        self.assertEquals(FAKE_URL, offer["url"])
+         
+        ACTUAL_PRICE = u"Zł  950,00"
+        self.assertEquals(ACTUAL_PRICE, offer["price"])
+         
+        ACTUAL_DATE = u"29/07/2014"
+        self.assertEquals(ACTUAL_DATE, offer["date"])
+         
+        ACTUAL_TITLE = u"Przytulne, 2 pokojowe, 35m, Ruczaj, Babińskiego"
+        self.assertEquals(ACTUAL_TITLE, offer["title"])
+         
+        ACTUAL_ADDRESS_SECTION = u"Doktora Józefa Babińskiego 23, 30-393 Kraków, Polska"
+        self.assertEquals(ACTUAL_ADDRESS_SECTION, offer["addressSection"])
+         
+        ACTUAL_DESCRIPTION = u"""Do wynajęcia od zaraz 2-pokojowe mieszkanie przy ul. Babińskiego 23b ( I piętro). Mieszkanie ma 2 pokoje ( w tym 1 przechodni), kuchnie, łazienkę, przedpokój i balkon z widokiem. Okolica bardzo spokojna. Przystanek autobusowy "Babińskiego" 2 min. od bloku, przystanek "Zachodnia" 7 min. Dojazd do centrum zajmuje ok. 30 min. Do miasta można również dojeżdżać busikami jeżdżącymi ze Skawiny, jest się wówczas w okolicach centrum( busiki jeżdżą pod Dworzec lub pod Pocztę Główną) w ok. 20 min.Przed blokiem jest miejsce do parkowania. Z balkonu ładny widok, żadnych bloków na horyzoncie:) Mieszkanie przytulne, remontowane kilka lat temu. Mieszkanie w pełni wyposażone (pralka, lodówka, kuchenka, piekarnik). Nowe okna, ogrzewanie miejskie. Opłaty miesięczne to ok. 450 zł przy 2 osobach (czynsz administracyjny + prąd)."""
+        self.assertEquals(ACTUAL_DESCRIPTION, offer["description"])
+         
+        ACTUAL_SUMMARY = u"""Do wynajęcia od zaraz 2-pokojowe mieszkanie przy ul. Babińskiego 23b ( I piętro). Mieszkanie ma 2 pokoje ( w tym 1 przechodni), kuchnie, łazienkę, przedpokój i balkon z widokiem. Okolica bardzo spokojna. Przystanek autobusowy &quot;Babińskiego&quot; 2 min. od"""
+        self.assertEquals(ACTUAL_SUMMARY, offer["summary"])
+         
+        ACTUAL_URL = u"http://i.ebayimg.com/00/s/NzY4WDEwMjQ=/z/bvsAAOSwVFlT1949/$_35.JPG"
+        self.assertEquals(ACTUAL_URL, offer["imageUrl"])
+         
+ 
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    unittest.main()
+  
+ 
+        
 OFFER_HTML = u"""
 <!DOCTYPE html PUBLIC "-//W3C//DTD OFFER_HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+ 
 <html xmlns="http://www.w3.org/1999/xhtml"  xmlns:fb="http://www.facebook.com/2008/fbml"> 
 <head>
 <title>Przytulne, 2 pokojowe, 35m, Ruczaj, Babińskiego</title>

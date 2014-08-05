@@ -1,7 +1,8 @@
 from pymaps import *
 
 class GoogleMap:
-    # map = None
+    map = None
+    
     def __init__(self, widthInPixels = 500, heightInPixels = 300):
         g = PyMap()                         # creates an icon & map by default
 
@@ -20,8 +21,6 @@ class GoogleMap:
         g.width = "{0}px".format(widthInPixels)
         g.height = "{0}px".format(heightInPixels)
 
-        # default zoom and center values
-        
         self.map = g
 
     def setCenter(self, coords):

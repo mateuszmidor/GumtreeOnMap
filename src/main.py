@@ -2,23 +2,16 @@
 
 # -*- coding: utf-8 -*-
 
-import setupdicontroller  # @UnusedImport
+import setupdependencyinjection  # @UnusedImport setups dependency injection controller
 
 import cgi
 import timeit
-import threading
-
 from gumtreequerry import GumtreeQuerry
-from geocoderwithcache import GeocoderWithCache
 from gumtreeoffers import GumtreeOffers
 from onlineview import OnlineView
 
 
-def renderHtmlPage(gmap):
-    print gmap.showHtml()
-
 def run():
-
     args = cgi.FieldStorage()
     querry = GumtreeQuerry.compose(city='Krakow', 
                                    whereabouts=args.getvalue("whereabouts", ""),
@@ -29,12 +22,8 @@ def run():
                                    maxArea=args.getvalue("maxarea", ""))
 
     offerCountLimit = int(args.getvalue("limit", 25))
-    offers = GumtreeOffers.askForOffers(querry, offerCountLimit, GeocoderWithCache())
-    
+    offers = GumtreeOffers.askForOffers(querry, offerCountLimit)
     OnlineView.render(offers, querry.city)
-
-
-
 
 try:
     total_time = timeit.timeit(run, setup="gc.enable()", number=1)
@@ -42,9 +31,6 @@ except Exception, e:
     print "Exception: ", e
     
 print "Time taken: ", total_time
-print "Num active threads: ", threading.active_count()
-
-
 
 
 

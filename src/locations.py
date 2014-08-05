@@ -1,5 +1,6 @@
 
 class Locations:
+    
     @staticmethod
     def fromOffers(offers):
         """ 

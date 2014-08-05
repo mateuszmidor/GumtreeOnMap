@@ -11,7 +11,6 @@ from gumtreeofferparser import (extractPrice, extractDate, extractTitle,
 
 class Test(unittest.TestCase):
 
-
     def testExtractPrice(self):
         ACTUAL_PRICE = u"Zł  950,00"
         price = extractPrice(OFFER_HTML)
