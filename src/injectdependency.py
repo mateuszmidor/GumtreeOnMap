@@ -4,52 +4,90 @@ Created on 04-08-2014
 @author: mateusz
 '''
 
-# injection target marker, eg.
-# @InjectDependency('fieldToBeInjected') 
-# class Injection():
-#     fieldToBeInjected = Inject
-Inject = "[inject instance for this field]"
+class Inject():
+    """
+    Dependency Injection marker.
+    Assign to fields that are supposed to be subject of dependency injection, eg.
+    
+    @InjectDependency('dependency') 
+    class DIExample():
+        dependency = Inject
+    """
+    def str(self):
+        return "[This field should be substituted with value by @InjectDependency decorator]"
 
 class DependencyInjectionException(Exception):
     pass
 
+class DependencyProxy():
+    """
+    We actually inject proxy to object, not the object itself.
+    This way we can easily exchange one dependency for another
+    even after all dependencies have already been injected
+    """
+    
+    target = None
+    
+    def __init__(self, target):
+        self.setProxyTarget(target)
+        
+    def __getattr__(self, name):
+        return getattr(self.target, name)
+        
+    def setProxyTarget(self, target):
+        self.target = target
+        
 class InjectDependency():
-    """"dependency injection decorator for classes"""
+    """"Dependency injection decorator for classes"""
     
     # dictionary with dependency_name : value pairs 
-    dependencies = { }
-    
+    dependencies = {}
     def __init__(self, *dependenciesToInject):
-        """takes list of dependencies names to be injected into a class"""
+        """takes list of dependencies names to be injected into the class"""
         self.dependenciesToInject = dependenciesToInject
     
     def __call__(self, targetClass):
         """takes target class to inject dependencies into"""
         
         for name in self.dependenciesToInject: 
-            self.throwIfDependencyNotRegistered(name)
-            self.throwIfNoSuchField(name, targetClass)
-            self.throwIfFieldNotDesignatedForInjection(name, targetClass)
-            targetClass.__dict__[name] = InjectDependency.dependencies[name]
-    
+            InjectDependency.throwIfDependencyNotRegistered(name)
+            InjectDependency.throwIfNoSuchField(name, targetClass)
+            InjectDependency.throwIfFieldNotDesignatedForInjection(name, targetClass)
+            setattr(targetClass, name, InjectDependency.dependencies[name])
+            
         # return class with injected dependencies
         return targetClass
     
-    def throwIfDependencyNotRegistered(self, name):
-        ERROR_STR = 'Cant inject not registered dependency "%s"'
+    @staticmethod
+    def throwIfDependencyNotRegistered(name):
+        ERROR_STR = 'Dependency not registered "%s". Use "registerDependency"'
         if (name not in InjectDependency.dependencies):
             raise DependencyInjectionException(ERROR_STR % name)
-    
-    def throwIfNoSuchField(self, name, targetClass):
+  
+    @staticmethod
+    def throwIfDependencyAlreadyRegistered(name):
+        ERROR_STR = 'Dependency already registered "%s". Use "changeDependency"'
+        if (name in InjectDependency.dependencies):
+            raise DependencyInjectionException(ERROR_STR % name)
+          
+    @staticmethod
+    def throwIfNoSuchField(name, targetClass):
         ERROR_STR = 'Cant inject dependency. No field "%s" in class "%s"'
         if (name not in targetClass.__dict__):
             raise DependencyInjectionException(ERROR_STR % (name, targetClass.__name__))
         
-    def throwIfFieldNotDesignatedForInjection(self, name, targetClass):
+    @staticmethod
+    def throwIfFieldNotDesignatedForInjection(name, targetClass):
         ERROR_STR = 'Field "%s.%s" not designated for injection. Should be initially set to "Inject" instead of "%s"'
         if (targetClass.__dict__[name] != Inject):
             raise DependencyInjectionException(ERROR_STR % ( targetClass.__name__, name, targetClass.__dict__[name]))
         
     @staticmethod
     def registerDependency(name, value):
-        InjectDependency.dependencies[name] = value
+        InjectDependency.throwIfDependencyAlreadyRegistered(name)
+        InjectDependency.dependencies[name] = DependencyProxy(value)
+ 
+    @staticmethod 
+    def changeDependency(name, value):
+        InjectDependency.throwIfDependencyNotRegistered(name)
+        InjectDependency.dependencies[name].setProxyTarget(value)
