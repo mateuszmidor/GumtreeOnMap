@@ -9,32 +9,32 @@ from injectdependency import Inject, DependencyInjectionException, InjectDepende
     
 # Register examplary dependencies for testing purposes.
 # This will be normally done in a SetupDependencyInjection module
-InjectDependency.registerDependency('db', "[DefaultDB]")
-InjectDependency.registerDependency('logger', "[DefaultLogger]")
+InjectDependency.registerDependency('_testdb_', "[DefaultDB]")
+InjectDependency.registerDependency('_testlogger_', "[DefaultLogger]")
 
 class Test(unittest.TestCase):
     
     def testInjectDependency(self):
-        @InjectDependency('db')
+        @InjectDependency('_testdb_')
         class Object():
-            db = Inject
+            _testdb_ = Inject
         
         # check if proper value injected
-        self.assertEquals("[DefaultDB]", Object.db)   
+        self.assertEquals("[DefaultDB]", Object._testdb_)   
             
     def testChangeDependency(self):
-        @InjectDependency('logger')
+        @InjectDependency('_testlogger_')
         class Object():
-            logger = Inject
+            _testlogger_ = Inject
             
         # check properly injected
-        self.assertEquals('[DefaultLogger]', Object.logger) 
+        self.assertEquals('[DefaultLogger]', Object._testlogger_) 
         
         # change dependency
-        InjectDependency.changeDependency('logger', "[FunkyLogger]")
+        InjectDependency.changeDependency('_testlogger_', "[FunkyLogger]")
         
         # check properly changed
-        self.assertEquals('[FunkyLogger]', Object.logger)
+        self.assertEquals('[FunkyLogger]', Object._testlogger_)
                 
     def testThrowsOnInjectingUnregisteredDependency(self):
         try:
@@ -48,9 +48,9 @@ class Test(unittest.TestCase):
 
     def testThrowsOnNoSuchField(self):
         try:
-            @InjectDependency('logger')
+            @InjectDependency('_testlogger_')
             class Object():
-                LOGGER = Inject # 'LOGGER' != 'logger'
+                LOGGER = Inject # 'LOGGER' != '_testlogger_'
                 
             self.fail("Should have thrown on injecting into non-existing field")
         except DependencyInjectionException:
@@ -58,9 +58,9 @@ class Test(unittest.TestCase):
         
     def testThrowsOnNonInjectionDesignatedField(self):
         try:
-            @InjectDependency('logger')
+            @InjectDependency('_testlogger_')
             class Object():
-                logger = None # logger not marked with 'Inject'   
+                _testlogger_ = None # _testlogger_ not marked with 'Inject'   
                 
             self.fail("Should have thrown on injecting into field not marked for injection")
         except DependencyInjectionException:
@@ -68,7 +68,7 @@ class Test(unittest.TestCase):
         
     def testThrowsOnAlreadyRegistered(self):
         try:
-            InjectDependency.registerDependency('logger', "[DefaultLogger]")
+            InjectDependency.registerDependency('_testlogger_', "[DefaultLogger]")
             self.fail("Should have failed on registering already registered dependency")
         except DependencyInjectionException:
             pass

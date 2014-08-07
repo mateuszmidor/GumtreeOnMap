@@ -51,14 +51,16 @@ class GoogleMapPoints():
     def __init__(self, points):
         self.points = points
         
+    def removeNewlines(self, s):
+        return s.replace(u'\n', u'').replace(u'\r', u'')
+    
     def asJavaScript(self):
         """ [[50.11, 10.54, 'Nowe mieszkanie w centrum...', icon_today], [...]] """
         
         stringPoints = []
         for point in self.points:
-            s = "[{0}, {1}, '{2}', {3}]".format(point[0], point[1], point[2], point[3])
+            s = u"[{0}, {1}, '{2}', {3}]".format(point[0], point[1], point[2], point[3])
             stringPoints.append(s) 
             
-        js = "[" + ", ".join(stringPoints) + "]"
-        
-        return js
+        js = u"[" + ", ".join(stringPoints) + "]"
+        return self.removeNewlines(js)

@@ -11,10 +11,10 @@ from gumtreeoffers import GumtreeOffers
 def run():
 
     print "Composing offer querry"
-    querry = GumtreeQuerry.compose(city='Krakow' )
-
+    querry = GumtreeQuerry.compose(city=u'Kraków')
+    
     print "Fetching offers"
-    offers = GumtreeOffers.askForOffers(querry, 20)
+    offers = GumtreeOffers.askForOffers(querry, 5)
 
     print "Rendering the offer page"
     DesktopView.render(offers, querry.city)

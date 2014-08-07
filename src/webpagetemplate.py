@@ -21,7 +21,7 @@ class WebPageTemplate():
         self.__html = html
         
     def setField(self, fieldname, value):
-        self.__html = self.__html.replace(fieldname, value)
+        self.__html = self.__html.replace(unicode(fieldname), unicode(value))
         
     def saveToFile(self, filename):
         codecs.open(filename, mode="wb", encoding="utf-8").write(self.__html)

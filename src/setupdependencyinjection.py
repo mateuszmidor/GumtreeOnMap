@@ -11,8 +11,13 @@ from utf8printer import Utf8Printer
 from geocoderwithcache import GeocoderWithCache
 from urlfetcher import UrlFetcher
 from addressresolver import AddressResolver
+from wardrobe import Wardrobe
+# 
 
+InjectDependency.registerDependency('logger', '[logger here]')
 InjectDependency.registerDependency('printer', Utf8Printer)
-InjectDependency.registerDependency('geocoder', GeocoderWithCache())
 InjectDependency.registerDependency('urlfetcher', UrlFetcher)
 InjectDependency.registerDependency('addressresolver', AddressResolver)
+
+addressstorage = Wardrobe.fromFile('data\geocodedaddresses.db')
+InjectDependency.registerDependency('geocoder', GeocoderWithCache(storage=addressstorage))

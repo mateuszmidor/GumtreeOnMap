@@ -12,7 +12,8 @@ class EmptyStub():
 
 # Register all dependencies that will be needed in tests
 # For now set them to some dummy value, they will be changed in tests
-InjectDependency.registerDependency("urlfetcher", EmptyStub)
+InjectDependency.registerDependency('logger', EmptyStub)
+InjectDependency.registerDependency('urlfetcher', EmptyStub)
 InjectDependency.registerDependency('geocoder', EmptyStub)
 InjectDependency.registerDependency('printer', EmptyStub)
 InjectDependency.registerDependency('addressresolver', EmptyStub)

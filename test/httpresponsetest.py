@@ -4,7 +4,7 @@ Created on 03-08-2014
 @author: mateusz
 '''
 import unittest
-import setupdependencyinjection  # @UnusedImport setups dependency injection forObject tests
+import setupdependencyinjectiontest  # @UnusedImport setups dependency injection forObject tests
 from httpresponse import HttpResponse
 from injectdependency import InjectDependency
 

@@ -5,7 +5,7 @@ Created on 02-08-2014
 '''
  
 import unittest
-import setupdependencyinjection  # @UnusedImport configures dependency injection for tests
+import setupdependencyinjectiontest  # @UnusedImport configures dependency injection for tests
 from gumtreeoffers import GumtreeOffers
 from injectdependency import InjectDependency
  
