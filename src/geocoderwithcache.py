@@ -3,27 +3,30 @@ Created on 03-08-2014
 
 @author: mateusz
 '''
-import shelve
 from geocoder import Geocoder
 
 class GeocoderWithCache():
-    def __init__(self, addressDict = None, geocoder=Geocoder):
+    def __init__(self, geocoder=Geocoder, storage=dict()):
         self.geocoder = geocoder
-        if (addressDict):
-            self.cachedAddresses = addressDict
-        else:
-            self.cachedAddresses = shelve.open("data/geocodedaddresses.db")
+        self.addressCache = storage
         
     def getCoordinates(self, address):
-        address = address.lower() # addresses in cache are encoded as lowercase
+        address = self.normalize(address)
         if (self.cachedAddress(address)):
             return self.getCachedCoordsForAddress(address)
         else:
             return self.geocoder.getCoordinates(address)
             
+    def registerAddress(self, address, coordinates):
+        address = self.normalize(address)
+        self.addressCache[address] = coordinates
+        
+    def normalize(self, address):
+        return address.lower()
+    
     def cachedAddress(self, address):
-        return (address in self.cachedAddresses)
+        return (address in self.addressCache)
     
     def getCachedCoordsForAddress(self, address):
-        return self.cachedAddresses[address]
+        return self.addressCache[address]
         
