@@ -24,6 +24,14 @@ class Test(unittest.TestCase):
         self.assertEquals("Wednesday", w[u"Środa"])
         self.assertEquals("Friday", w[u"Piątek"])
 
+    def testInOperator(self):
+        w = Wardrobe.fromDictionary({})
+        w[u"Środa"] = "Wednesday"
+        w[u"Piątek"] = "Friday"  
+        
+        self.assertTrue(u"Środa" in w)
+        self.assertTrue(u"Piątek" in w)
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

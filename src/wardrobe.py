@@ -28,6 +28,10 @@ class Wardrobe():
     def __init__(self, storage):
         self.storage = storage
      
+    def __contains__(self, unicodeKey):
+        key = self.unicodeToNearestAscii(unicodeKey)
+        return (key in self.storage)
+     
     def __getitem__(self, unicodeName):
         name = self.unicodeToNearestAscii(unicodeName)
         return self.storage[name]
