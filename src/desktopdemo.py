@@ -11,7 +11,7 @@ from gumtreeoffers import GumtreeOffers
 def run():
 
     print "Composing offer querry"
-    querry = GumtreeQuerry.compose(city=u'Kraków')
+    querry = GumtreeQuerry.compose(city='Krakow')
     
     print "Fetching offers"
     offers = GumtreeOffers.askForOffers(querry, 5)
