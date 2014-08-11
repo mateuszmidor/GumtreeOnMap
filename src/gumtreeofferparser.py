@@ -2,14 +2,24 @@
 
 import re
 
-def stripTextFromHtmlTags(text):
-    return re.sub('<[^<]+>', '', text)
+def extractOffer(html):
+        title = extractTitle(html)
+        date = extractDate(html)
+        price = extractPrice(html)
+        addressSection = extractAddress(html)
+        description = extractDescription(html)
+        summary = extractSummary(html)
+        imageUrl = extractImageUrl(html)
+        
+        offer = {"title" : title,
+                 "date" : date,
+                 "price" : price,
+                 "addressSection" : addressSection,
+                 "description" : description,
+                 "summary" : summary,
+                 "imageUrl" : imageUrl}
+        return offer    
 
-def getStringBetween(source, start, stop):
-    iStart = source.find(start) + len(start)
-    iStop = source.find(stop, iStart)
-    return source[iStart:iStop].strip()
-    
 def extractPrice(offerHtml):
     START_TAG = "<td style='font-weight:bold'>"
     STOP_TAG = "</td>"
@@ -48,3 +58,11 @@ def extractImageUrl(offerHtml):
     START_TAG = '<meta property="og:image" content="'
     STOP_TAG = '"/>'
     return getStringBetween(offerHtml, START_TAG, STOP_TAG)   
+
+def stripTextFromHtmlTags(text):
+    return re.sub('<[^<]+>', '', text)
+
+def getStringBetween(source, start, stop):
+    iStart = source.find(start) + len(start)
+    iStop = source.find(stop, iStart)
+    return source[iStart:iStop].strip()

@@ -25,22 +25,6 @@ class OfferFetcher(Thread):
     
     def getOffer(self, url):
         html = self.urlfetcher.fetchDocument(url)
-        
-        title = Parser.extractTitle(html)
-        date = Parser.extractDate(html)
-        price = Parser.extractPrice(html)
-        addressSection = Parser.extractAddress(html)
-        description = Parser.extractDescription(html)
-        summary = Parser.extractSummary(html)
-        imageUrl = Parser.extractImageUrl(html)
-        
-        offer = {"title" : title,
-                 "date" : date,
-                 "price" : price,
-                 "addressSection" : addressSection,
-                 "description" : description,
-                 "summary" : summary,
-                 "url" : url,
-                 "imageUrl" : imageUrl}
-        
+        offer = Parser.extractOffer(html)
+        offer["url"] = url
         return offer
