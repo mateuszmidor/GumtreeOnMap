@@ -12,7 +12,7 @@ class OfferFetcher(Thread):
     urlfetcher = Inject
     
     def __init__(self, inQueue, outQueue):
-        Thread.__init__(self)
+        Thread.__init__(self, name="OfferFetcher")
         self.inQueue = inQueue
         self.outQueue = outQueue
 
