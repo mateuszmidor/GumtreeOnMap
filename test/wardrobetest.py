@@ -32,6 +32,12 @@ class Test(unittest.TestCase):
         self.assertTrue(u"Środa" in w)
         self.assertTrue(u"Piątek" in w)
         
+    def testSupportAsciiKeys(self):
+        w = Wardrobe.fromDictionary({})
+        w["Środa"] = "Wednesday"
+            
+        self.assertEquals("Wednesday", w["Środa"])
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

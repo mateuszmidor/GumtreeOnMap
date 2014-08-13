@@ -29,17 +29,20 @@ class Wardrobe():
         self.storage = storage
      
     def __contains__(self, unicodeKey):
-        key = self.unicodeToNearestAscii(unicodeKey)
+        key = self.ensureAscii(unicodeKey)
         return (key in self.storage)
      
     def __getitem__(self, unicodeName):
-        name = self.unicodeToNearestAscii(unicodeName)
+        name = self.ensureAscii(unicodeName)
         return self.storage[name]
     
     def __setitem__(self, unicodeName, value):
-        name = self.unicodeToNearestAscii(unicodeName)
+        name = self.ensureAscii(unicodeName)
         self.storage[name] = value
         
-    def unicodeToNearestAscii(self, ustr):
-        # here find the nearest representation of ustr in ascii
-        return unidecode.unidecode(ustr)
+    def ensureAscii(self, s):
+        # here find the nearest representation of s in ascii
+        if isinstance(s, unicode):
+            return unidecode.unidecode(s)
+        else:
+            return s
