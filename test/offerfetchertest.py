@@ -16,7 +16,7 @@ class OfferPageFetcher():
      
 class Test(unittest.TestCase):
     def setUp(self):
-        InjectDependency.changeDependency('urlfetcher', OfferPageFetcher)
+        InjectDependency.setDependency('urlfetcher', OfferPageFetcher)
         
     def testFetchOffer(self):
         inQueue = Queue.Queue()

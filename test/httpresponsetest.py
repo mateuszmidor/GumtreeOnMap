@@ -20,7 +20,7 @@ class FakePrinter():
 class Test(unittest.TestCase):
         
     def setUp(self):
-        InjectDependency.changeDependency('printer', FakePrinter)
+        InjectDependency.setDependency('printer', FakePrinter)
          
     def testRenderPage(self):
         HTTP_CONTENT_TYPE_HEADER = u"Content-type: text/html;charset=utf-8\n\n"

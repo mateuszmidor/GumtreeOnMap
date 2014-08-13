@@ -38,9 +38,9 @@ class AddressResolverStub():
 
 class Test(unittest.TestCase):
     def setUp(self):
-        InjectDependency.changeDependency('urlfetcher', OffesFetcher)
-        InjectDependency.changeDependency('geocoder', GeocoderStub)       
-        InjectDependency.changeDependency('addressresolver', AddressResolverStub)       
+        InjectDependency.setDependency('urlfetcher', OffesFetcher)
+        InjectDependency.setDependency('geocoder', GeocoderStub)       
+        InjectDependency.setDependency('addressresolver', AddressResolverStub)       
  
     def testGetOffers(self):
         UNLIMITED_COUNT = 999

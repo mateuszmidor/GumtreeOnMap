@@ -17,7 +17,7 @@ class LoggerMock():
 class Test(unittest.TestCase):
 
     def setUp(self):
-        InjectDependency.changeDependency('logger', LoggerMock)
+        InjectDependency.setDependency('logger', LoggerMock)
 
     def testInterceptsAndLogs(self):
         EXCEPTION = Exception('SomeException')

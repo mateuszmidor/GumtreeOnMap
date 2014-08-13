@@ -18,7 +18,7 @@ class OfferUrlsFetcher():
 class Test(unittest.TestCase):
     
     def setUp(self):
-        InjectDependency.changeDependency('urlfetcher', OfferUrlsFetcher)
+        InjectDependency.setDependency('urlfetcher', OfferUrlsFetcher)
          
     def testGetOfferUrls(self):
         OFFER_URLS = ["http://www.gumtree.pl/offer1",
