@@ -12,12 +12,18 @@ from geocoderwithcache import GeocoderWithCache
 from urlfetcher import UrlFetcher
 from addressresolver import AddressResolver
 from wardrobe import Wardrobe
-# 
+from parallelgumtreeofferfetcher import ParallelGumtreeOfferFetcher
+from gumtreeofferurls import GumtreeOfferUrls
 
-InjectDependency.registerDependency('logger', '[logger here]')
-InjectDependency.registerDependency('printer', Utf8Printer)
-InjectDependency.registerDependency('urlfetcher', UrlFetcher)
-InjectDependency.registerDependency('addressresolver', AddressResolver)
+InjectDependency.setDependency('logger', '[logger here]')
+InjectDependency.setDependency('printer', Utf8Printer)
+InjectDependency.setDependency('urlfetcher', UrlFetcher)
+InjectDependency.setDependency('offerfetcher', ParallelGumtreeOfferFetcher)
+InjectDependency.setDependency('offerurls', GumtreeOfferUrls)
+InjectDependency.setDependency('addressresolver', AddressResolver)
 
-addressstorage = Wardrobe.fromFile('data\geocodedaddresses.db')
-InjectDependency.registerDependency('geocoder', GeocoderWithCache(storage=addressstorage))
+addressstorage = Wardrobe.fromFile('data\cachedaddresses.db')
+InjectDependency.setDependency('geocoder', GeocoderWithCache(storage=addressstorage))
+
+offerCache = Wardrobe.fromFile('data\cachedoffers.db')
+InjectDependency.setDependency('offercache', offerCache)
