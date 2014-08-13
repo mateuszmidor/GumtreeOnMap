@@ -1,6 +1,9 @@
 ﻿# -*- coding: UTF-8 -*-
 
 import Queue
+
+import setupdependencyinjection  # @UnusedImport setups dependency injection
+
 from offerfetcher import OfferFetcher
 from gumtreeofferurls import GumtreeOfferUrls
 from injectdependency import InjectDependency, Inject
