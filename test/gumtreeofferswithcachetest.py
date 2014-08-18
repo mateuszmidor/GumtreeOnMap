@@ -17,8 +17,9 @@ class OfferUrlsStub():
 # this guy is used by GumtreeOffersWithCache
 class OfferFetcherMock():
     offerlist = []
-    def __init__(self, cityAddressResolver, numThreads):
-        pass
+    @classmethod
+    def parallelWithAddressResolutionAndGeocoding(cls, cityAddressResolver, numThreads):
+        return cls()
     
     def enqueueUrl(self, url):
         URL_TO_OFFER = {"url1" : "offer1",
