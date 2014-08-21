@@ -28,7 +28,7 @@ class OnlineView():
         
     @staticmethod
     def getOfferPage(mapPoints, mapCenter, mapZoom):
-        offerPage = WebPageTemplate.fromFile("../data/OnlineView.htm")
+        offerPage = WebPageTemplate.fromFile("data/OnlineView.htm")
         offerPage.setField(u"$POINTS$", mapPoints.asJavaScript())
         offerPage.setField(u"$MAP_CENTER_LONG$", mapCenter[0])
         offerPage.setField(u"$MAP_CENTER_LATT$", mapCenter[1])
