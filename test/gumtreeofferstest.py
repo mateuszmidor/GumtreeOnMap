@@ -33,7 +33,10 @@ class OffesFetcher():
 # this guy is used by GumtreeOffers.askForOffers
 class AddressResolverStub(): 
     @staticmethod
-    def resolve(cityToLookForTheAddressIn, *sources):
+    def forCity(city):
+        return AddressResolverStub()
+    
+    def resolve(self, *sources):
         return "Krakow, Poland"
 
 class Test(unittest.TestCase):
