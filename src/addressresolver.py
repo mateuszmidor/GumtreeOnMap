@@ -12,6 +12,7 @@ class AddressResolver():
     
     @classmethod
     def forCity(cls, city):
+        city = city.lower()
         streetExtractor = AddressExtractor("data/{0}_streets.txt".format(city))
         districtExtractor = AddressExtractor("data/{0}_districts.txt".format(city))   
         return cls(city, streetExtractor, districtExtractor)
