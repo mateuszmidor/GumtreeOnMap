@@ -1,37 +1,29 @@
-#!/usr/bin/python
-
 # -*- coding: utf-8 -*-
 
 import setupdependencyinjection  # @UnusedImport setups dependency injection controller
 
-import cgi
-import timeit
 from gumtreequerry import GumtreeQuerry
 from gumtreeoffers import GumtreeOffers
 from onlineview import OnlineView
+from src.injectdependency import InjectDependency, Inject
 
-
-def run():
-    args = cgi.FieldStorage()
-    querry = GumtreeQuerry.compose(city='Krakow', 
-                                   whereabouts=args.getvalue("whereabouts", ""),
-                                   numRooms=args.getvalue("numrooms", ""),
-                                   minPrice=args.getvalue("minprice", ""),
-                                   args.getvalue("maxprice", ""),
-                                   minArea=args.getvalue("minarea", ""),
-                                   maxArea=args.getvalue("maxarea", ""))
-
-    offerCountLimit = int(args.getvalue("limit", 25))
-    offers = GumtreeOffers.askForOffers(querry, offerCountLimit)
-    OnlineView.render(offers, querry.city)
-
-try:
-    total_time = timeit.timeit(run, setup="gc.enable()", number=1)
-except Exception, e:
-    print "Exception: ", e
+@InjectDependency('logger')
+class Main():
+    logger = Inject
     
-print "Time taken: ", total_time
-
-
-
-
+    @staticmethod
+    def run(params):
+        try:
+            querry = GumtreeQuerry.compose(city='Krakow', 
+                                           whereabouts=params.getvalue("whereabouts", ""),
+                                           numRooms=params.getvalue("numrooms", ""),
+                                           minPrice=params.getvalue("minprice", ""),
+                                           maxPrice=params.getvalue("maxprice", ""),
+                                           minArea=params.getvalue("minarea", ""),
+                                           maxArea=params.getvalue("maxarea", ""))
+        
+            offerCountLimit = int(params.getvalue("limit", 25))
+            offers = GumtreeOffers.askForOffers(querry, offerCountLimit)
+            OnlineView.render(offers, querry.city)
+        except Exception, e:
+            Main.logger.exception(e)

@@ -4,7 +4,6 @@ Created on 31-07-2014
 @author: mateusz
 '''
 import datetime
-import cgi
 class GoogleMapPoints():
     
     @staticmethod
