@@ -4,6 +4,7 @@ Created on 31-07-2014
 @author: mateusz
 '''
 import datetime
+import cgi
 class GoogleMapPoints():
     
     @staticmethod
@@ -41,6 +42,7 @@ class GoogleMapPoints():
                 summary = offer["summary"]
                 hint = hint + GoogleMapPoints.prepareHintBody(title, date, price, addressSection, summary, url)
                 
+            hint = hint.replace("'", "&apos;")
             longitude, lattitude = location["longlatt"]
             iconName = GoogleMapPoints.getIconForDate(date)
             point = [longitude, lattitude, hint, iconName]
