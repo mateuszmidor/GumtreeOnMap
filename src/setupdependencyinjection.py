@@ -22,8 +22,8 @@ InjectDependency.setDependency('offerfetcher', ParallelGumtreeOfferFetcher)
 InjectDependency.setDependency('offerurls', GumtreeOfferUrls)
 InjectDependency.setDependency('addressresolver', AddressResolver)
 
-addressstorage = Wardrobe.fromFile('data\cachedaddresses.db')
+addressstorage = Wardrobe.fromFile('data/cachedaddresses.db')
 InjectDependency.setDependency('geocoder', GeocoderWithCache(storage=addressstorage))
 
-offerCache = Wardrobe.fromFile('data\cachedoffers.db')
+offerCache = Wardrobe.fromFile('data/cachedoffers.db')
 InjectDependency.setDependency('offercache', offerCache)
