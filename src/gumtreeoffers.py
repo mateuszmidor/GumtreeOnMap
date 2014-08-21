@@ -9,8 +9,9 @@ from gumtreeofferurls import GumtreeOfferUrls
 from injectdependency import InjectDependency, Inject
 import time
 
-@InjectDependency('geocoder', 'addressresolver')
+@InjectDependency('logger', 'geocoder', 'addressresolver')
 class GumtreeOffers():
+    logger = Inject
     geocoder = Inject 
     addressresolver = Inject
     
@@ -60,10 +61,14 @@ class GumtreeOffers():
     def addGeocoordsToEachOffer(offers):
         offersWithCoords = []
         for offer in offers:
-            offerWithCoords = dict(offer) # make a copy not to affect original offer
-            offerWithCoords['longlatt'] = GumtreeOffers.geocoder.getCoordinates(offer["address"])
-            offersWithCoords.append(offerWithCoords)
-            time.sleep(0.1) # google geocoding limit 10/sec max
+            try: # cant be geocoded then skip this offer
+                offerWithCoords = dict(offer) # make a copy not to affect original offer
+                offerWithCoords['longlatt'] = GumtreeOffers.geocoder.getCoordinates(offer["address"])
+                offersWithCoords.append(offerWithCoords)
+            except Exception, e:
+                GumtreeOffers.logger.exception(e)
+            finally:
+                time.sleep(0.1) # google geocoding limit 10/sec max
             
         return offersWithCoords
     

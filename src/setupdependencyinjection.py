@@ -14,8 +14,9 @@ from addressresolver import AddressResolver
 from wardrobe import Wardrobe
 from parallelgumtreeofferfetcher import ParallelGumtreeOfferFetcher
 from gumtreeofferurls import GumtreeOfferUrls
+from logger import Logger
 
-InjectDependency.setDependency('logger', '[logger here]')
+InjectDependency.setDependency('logger', Logger.toFile('diagnostics/logger.txt'))
 InjectDependency.setDependency('printer', Utf8Printer)
 InjectDependency.setDependency('urlfetcher', UrlFetcher)
 InjectDependency.setDependency('offerfetcher', ParallelGumtreeOfferFetcher)
