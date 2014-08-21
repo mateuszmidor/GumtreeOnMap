@@ -7,6 +7,7 @@ import setupdependencyinjection  # @UnusedImport setups dependency injection
 from offerfetcher import OfferFetcher
 from gumtreeofferurls import GumtreeOfferUrls
 from injectdependency import InjectDependency, Inject
+import time
 
 @InjectDependency('geocoder', 'addressresolver')
 class GumtreeOffers():
@@ -43,14 +44,14 @@ class GumtreeOffers():
     @staticmethod
     def addAddressToEachOffer(offers, city):
         offersWithAddress = []
+        resolver = GumtreeOffers.addressresolver.forCity(city)
         for offer in offers:
             offerWithAddress = dict(offer) # make a copy not to affect original offer
             
             # lets try to find more accurate address than only the supplied city name
-            offerWithAddress['address'] = GumtreeOffers.addressresolver.resolve(city,
-                                                                                offer["addressSection"],
-                                                                                offer["title"],
-                                                                                offer["summary"]) 
+            offerWithAddress['address'] = resolver.resolve(offer["addressSection"],
+                                                           offer["title"],
+                                                           offer["summary"]) 
             offersWithAddress.append(offerWithAddress)
             
         return offersWithAddress
@@ -62,6 +63,7 @@ class GumtreeOffers():
             offerWithCoords = dict(offer) # make a copy not to affect original offer
             offerWithCoords['longlatt'] = GumtreeOffers.geocoder.getCoordinates(offer["address"])
             offersWithCoords.append(offerWithCoords)
+            time.sleep(0.1) # google geocoding limit 10/sec max
             
         return offersWithCoords
     
