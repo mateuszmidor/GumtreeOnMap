@@ -16,3 +16,6 @@ class Logger():
         
     def exception(self, e):
         logging.exception(str(e))
+        
+    def info(self, msg):
+        logging.info(msg)
