@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rexpfd>
+    <destination path="mateusz_lap.ftp.mateuszmidor.com:/public_html/cgi-bin"/>
+    <options createDirectoryStructure="true" createSelectedOnly="false" descriptionFilePath="/GumtreeOnMap/sync.rexpfd" overWriteExistingFiles="true" reviewSynchronize="false" saveSettings="true"/>
+    <selectedElements>
+        <file path="/GumtreeOnMap/.pydevproject_"/>
+        <file path="/GumtreeOnMap/index.py"/>
+        <file path="/GumtreeOnMap/data/OnlineView.htm"/>
+        <file path="/GumtreeOnMap/data/krakow_districts.txt"/>
+        <file path="/GumtreeOnMap/data/krakow_streets.txt"/>
+        <file path="/GumtreeOnMap/diagnostics/logger.txt"/>
+        <folder path="/GumtreeOnMap/src"/>
+    </selectedElements>
+</rexpfd>
