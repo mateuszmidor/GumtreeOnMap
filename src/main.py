@@ -2,10 +2,11 @@
 
 import setupdependencyinjection  # @UnusedImport setups dependency injection controller
 
+import time
 from gumtreequerry import GumtreeQuerry
 from gumtreeoffers import GumtreeOffers
 from onlineview import OnlineView
-from src.injectdependency import InjectDependency, Inject
+from injectdependency import InjectDependency, Inject
 
 @InjectDependency('logger')
 class Main():
@@ -13,6 +14,8 @@ class Main():
     
     @staticmethod
     def run(params):
+        Main.logger.info("---------- New session: " + time.strftime("%X"))
+        
         try:
             querry = GumtreeQuerry.compose(city='Krakow', 
                                            whereabouts=params.getvalue("whereabouts", ""),
@@ -27,3 +30,6 @@ class Main():
             OnlineView.render(offers, querry.city)
         except Exception, e:
             Main.logger.exception(e)
+            
+        finally:
+            Main.logger.info("---------- Done. " + time.strftime("%X")) 
