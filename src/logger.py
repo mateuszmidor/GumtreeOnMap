@@ -12,10 +12,19 @@ class Logger():
         return cls(filename)
     
     def __init__(self, filename):
-        logging.basicConfig(filename=filename,level=logging.DEBUG)
+        logging.basicConfig(filename=filename,level=logging.INFO)
         
     def exception(self, e):
         logging.exception(str(e))
         
+    def debug(self, msg):
+        logging.debug(msg)
+        
     def info(self, msg):
         logging.info(msg)
+        
+    def warn(self, msg):
+        logging.warn(msg)
+        
+    def error(self, msg):
+        logging.error(msg)
