@@ -22,7 +22,7 @@ class Main():
             Main.logger.info("New session: " + time.strftime("%X, %x"))
             cProfile.run("Main.runUnderDiagnosticsControl(params)", filename=PROFILER_RAW)
             p = pstats.Stats(PROFILER_RAW, stream=open(name=PROFILER_TXT, mode='a'))
-            p.strip_dirs().sort_stats('cumulative').print_stats(20)
+            p.strip_dirs().sort_stats('time').print_stats(20)
             
         except Exception, e:
             Main.logger.exception(e)

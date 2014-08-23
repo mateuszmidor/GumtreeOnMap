@@ -19,7 +19,7 @@ class Demo():
             Demo.logger.info("New session: " + time.strftime("%X, %x"))
             cProfile.run("Demo.runUnderDiagnosticsControl()", filename=PROFILER_RAW)
             p = pstats.Stats(PROFILER_RAW, stream=open(name=PROFILER_TXT, mode='a'))
-            p.strip_dirs().sort_stats('cumulative').print_stats(20)
+            p.strip_dirs().sort_stats('time').print_stats(20)
             
         except Exception, e:
             Demo.logger.exception(e)
