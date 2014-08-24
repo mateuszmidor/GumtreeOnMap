@@ -20,7 +20,7 @@ class GumtreeOffersWithCache():
     @staticmethod
     def askForOffers(querry, count):
         # value limited by netmark host
-        MAX_THREADS = 7 
+        MAX_THREADS = 6 
         querryUrl = str(querry)
         urls = GumtreeOffersWithCache.offerurls.getUrls(querryUrl, count)
         cityAddressResolver = GumtreeOffersWithCache.addressresolver.forCity(querry.city)
