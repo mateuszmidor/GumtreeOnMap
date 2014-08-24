@@ -7,7 +7,7 @@
         <file path="/GumtreeOnMap/data/OnlineView.htm"/>
         <file path="/GumtreeOnMap/data/krakow_districts.txt"/>
         <file path="/GumtreeOnMap/data/krakow_streets.txt"/>
-        <folder path="/GumtreeOnMap/diagnostics"/>
+        <file path="/GumtreeOnMap/diagnostics/rawprofiler.bin"/>
         <folder path="/GumtreeOnMap/src"/>
     </selectedElements>
 </rexpfd>
