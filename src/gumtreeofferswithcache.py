@@ -37,6 +37,6 @@ class GumtreeOffersWithCache():
                 offers.append(offercache[url])
             else:
                 fetcher.enqueueUrl(url)
-                time.sleep(0.1) # prevent google too many requests error (geocoding, max 10 reqs/sec)
+#                 time.sleep(0.1) # prevent google too many requests error (geocoding, max 10 reqs/sec)
                 
         return offers + fetcher.offers()     
