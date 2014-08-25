@@ -7,7 +7,7 @@ from threading import Thread
 import gumtreeofferparser as Parser
 from injectdependency import Inject, InjectDependency
 
-@InjectDependency('urlfetcher', 'geocoder') 
+@InjectDependency('urlfetcher', 'geocoder', 'logger') 
 class OfferFetcherThread(Thread):
     """
         you create this thread with inQueue and outQueue, 
@@ -19,6 +19,7 @@ class OfferFetcherThread(Thread):
     """
     urlfetcher = Inject
     geocoder = Inject
+    logger = Inject
     
     def __init__(self, inQueue, outQueue, addressresolver):
         Thread.__init__(self, name="OfferFetcherThread")
@@ -33,6 +34,8 @@ class OfferFetcherThread(Thread):
                 url = self.inQueue.get()       
                 offer = self.getOffer(url)
                 self.outQueue.put(offer)
+            except Exception, e:
+                OfferFetcherThread.logger.exception(e)
             finally:
                 self.inQueue.task_done()
 
