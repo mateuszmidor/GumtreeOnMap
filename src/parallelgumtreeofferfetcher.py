@@ -5,8 +5,12 @@ Created on 11-08-2014
 '''
 import Queue
 from offerfetcherthread import OfferFetcherThread
+from injectdependency import InjectDependency, Inject
+import threading
 
+@InjectDependency('logger')
 class ParallelGumtreeOfferFetcher():
+    logger = Inject
     
     @classmethod
     def parallelWithAddressResolutionAndGeocoding(cls, cityAddressResolver, numThreads):
@@ -18,6 +22,7 @@ class ParallelGumtreeOfferFetcher():
         
         # prepare working threads
         for i in xrange(numThreads):  # @UnusedVariable
+            self.logger.info("Num threads: %d. Starting new one" % threading.active_count())
             t = FetcherThread(self.inQueue, self.outQueue, cityAddressResolver)
             t.start() 
             

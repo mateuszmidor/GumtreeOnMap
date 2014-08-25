@@ -35,7 +35,7 @@ class OfferFetcherThread(Thread):
                 offer = self.getOffer(url)
                 self.outQueue.put(offer)
             except Exception, e:
-                OfferFetcherThread.logger.exception(e)
+                self.logger.exception(e)
             finally:
                 self.inQueue.task_done()
 
