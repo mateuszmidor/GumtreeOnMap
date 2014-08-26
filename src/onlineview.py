@@ -9,9 +9,10 @@ from googlemappoints import GoogleMapPoints
 from httpresponse import HttpResponse
 from injectdependency import InjectDependency, Inject
 
-@InjectDependency('geocoder')
+@InjectDependency('geocoder', 'logger')
 class OnlineView():
     geocoder = Inject
+    logger = Inject
     
     @staticmethod
     def render(offers, city):
@@ -24,7 +25,11 @@ class OnlineView():
 
     @staticmethod
     def getMapCenter(city):
-        return OnlineView.geocoder.getCoordinates(city)
+        try:
+            return OnlineView.geocoder.getCoordinates(city)
+        except Exception, e:
+            OnlineView.logger.exception(e)
+            return (50.0646501, 19.9449799) #krakow
         
     @staticmethod
     def getOfferPage(mapPoints, mapCenter, mapZoom):
