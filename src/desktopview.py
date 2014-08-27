@@ -23,8 +23,10 @@ class DesktopView():
         
     @staticmethod
     def getMapCenter(city):
-        return DesktopView.geocoder.getCoordinates(city)
-        
+        try:
+            return DesktopView.geocoder.getCoordinates(city)
+        except:
+            return (50.0646501, 19.9449799) #krakow
     @staticmethod
     def getOfferPage(mapPoints, mapCenter, mapZoom):
         offerPage = WebPageTemplate.fromFile("data/DesktopView.htm")
