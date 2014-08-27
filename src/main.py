@@ -16,7 +16,7 @@ class Main():
     
     @staticmethod
     def run(params):
-        PROFILER_RAW = 'diagnostics/rawprofiler.bin'
+        PROFILER_RAW = 'diagnostics/profiler.bin'
         PROFILER_TXT = 'diagnostics/profiler.txt'
         try:
             Main.logger.info("New session: " + time.strftime("%X, %x"))
