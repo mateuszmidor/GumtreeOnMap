@@ -1,5 +1,4 @@
 import pygeocoder 
-from injectdependency import InjectDependency, Inject
 from periodiclock import PeriodicLock
 
 class Geocoder:
