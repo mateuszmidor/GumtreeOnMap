@@ -8,7 +8,6 @@ import setupdependencyinjection  # @UnusedImport setups dependency injection
 
 from gumtreeofferurls import GumtreeOfferUrls
 from injectdependency import InjectDependency, Inject
-import time
 
 @InjectDependency('addressresolver', 'offercache', 'offerfetcher', 'offerurls')
 class GumtreeOffersWithCache():
@@ -20,7 +19,7 @@ class GumtreeOffersWithCache():
     @staticmethod
     def askForOffers(querry, count):
         # value limited by netmark host
-        MAX_THREADS = 4 
+        MAX_THREADS = 8 
         querryUrl = str(querry)
         urls = GumtreeOffersWithCache.offerurls.getUrls(querryUrl, count)
         cityAddressResolver = GumtreeOffersWithCache.addressresolver.forCity(querry.city)
@@ -37,6 +36,5 @@ class GumtreeOffersWithCache():
                 offers.append(offercache[url])
             else:
                 fetcher.enqueueUrl(url)
-#                 time.sleep(0.1) # prevent google too many requests error (geocoding, max 10 reqs/sec)
                 
         return offers + fetcher.offers()     
