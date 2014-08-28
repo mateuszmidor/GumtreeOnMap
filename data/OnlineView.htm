@@ -5,7 +5,12 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>GumtreeOnMap</title>
-    
+    <style type="text/css">
+        html {height:100%}
+        body {height:100%;margin:0;padding:0}
+        #map {width:100%; height: 95%; }
+      
+    </style>   
         <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAQQRAsOk3uqvy3Hwwo4CclBTrVPfEE8Ms0qPwyRfPn-DOTlpaLBTvTHRCdf2V6KbzW7PZFYLT8wFD0A" type="text/javascript"></script>
         <script type="text/javascript">
         //<![CDATA[
@@ -94,13 +99,13 @@
   <body onload="load()" onunload="GUnload()">
     <div id="filterForm">
         <form method=get action = "index.py">
-            Liczba pokojów: <input type="text" name="numrooms" value="2"/>
-            Cena maksymalna: <input type="text" name="maxprice" value="1400"/>
-            Dzielnica: <input type="text" name="whereabouts"/>
+            Liczba pokojów: <input type="text" name="numrooms" value="$NUM_ROOMS$"/>
+            Cena maksymalna: <input type="text" name="maxprice" value="$MAX_PRICE$"/>
+            Dzielnica: <input type="text" name="whereabouts" value="$WHEREABOUTS$"/>
             <input type="submit"/>
         </form>
     </div>
     
-    <div id="map" style="width: 1200px; height: 600px"></div>
+    <div id="map" style="background:blue"></div>
   </body>
 </html>

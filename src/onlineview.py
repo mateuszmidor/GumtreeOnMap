@@ -15,12 +15,16 @@ class OnlineView():
     logger = Inject
     
     @staticmethod
-    def render(offers, city):
+    def render(offers, query):
         locations = Locations.fromOffers(offers)
         mapPoints = GoogleMapPoints.fromLocations(locations)
-        mapCenter = OnlineView.getMapCenter(city)
+        mapCenter = OnlineView.getMapCenter(query.city)
         mapZoom = 12 # this should be evaluated  to ensure best map look 
-        offerPage = OnlineView.getOfferPage(mapPoints, mapCenter, mapZoom)
+        
+        offerPage = OnlineView.getOfferPage(mapPoints, mapCenter, mapZoom, 
+                                            query.numRooms,
+                                            query.maxPrice,
+                                            query.whereabouts)
         HttpResponse.renderPage(offerPage.getHtml())
 
     @staticmethod
@@ -32,11 +36,15 @@ class OnlineView():
             return (50.0646501, 19.9449799) #krakow
         
     @staticmethod
-    def getOfferPage(mapPoints, mapCenter, mapZoom):
+    def getOfferPage(mapPoints, mapCenter, mapZoom, numRooms, maxPrice, whereabouts):
         offerPage = WebPageTemplate.fromFile("data/OnlineView.htm")
         offerPage.setField(u"$POINTS$", mapPoints.asJavaScript())
         offerPage.setField(u"$MAP_CENTER_LONG$", mapCenter[0])
         offerPage.setField(u"$MAP_CENTER_LATT$", mapCenter[1])
         offerPage.setField(u"$MAP_ZOOM$", mapZoom)
+        offerPage.setField(u"NUM_ROOMS", numRooms)
+        offerPage.setField(u"MAX_PRICE", maxPrice)
+        offerPage.setField(u"WHEREABOUTS", whereabouts)
+        
         return offerPage
 

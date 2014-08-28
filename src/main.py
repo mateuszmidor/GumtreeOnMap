@@ -47,4 +47,4 @@ class Main():
     
         offerCountLimit = int(params.getvalue("limit", 24))
         offers = GumtreeOffersWithCache.askForOffers(querry, offerCountLimit)
-        OnlineView.render(offers, querry.city)
+        OnlineView.render(offers, querry)
