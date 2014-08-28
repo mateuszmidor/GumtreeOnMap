@@ -42,9 +42,9 @@ class OnlineView():
         offerPage.setField(u"$MAP_CENTER_LONG$", mapCenter[0])
         offerPage.setField(u"$MAP_CENTER_LATT$", mapCenter[1])
         offerPage.setField(u"$MAP_ZOOM$", mapZoom)
-        offerPage.setField(u"NUM_ROOMS", numRooms)
-        offerPage.setField(u"MAX_PRICE", maxPrice)
-        offerPage.setField(u"WHEREABOUTS", whereabouts)
+        offerPage.setField(u"$NUM_ROOMS$", numRooms)
+        offerPage.setField(u"$MAX_PRICE$", maxPrice)
+        offerPage.setField(u"$WHEREABOUTS$", u"")
         
         return offerPage
 
