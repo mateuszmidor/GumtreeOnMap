@@ -15,6 +15,7 @@ from wardrobe import Wardrobe
 from parallelgumtreeofferfetcher import ParallelGumtreeOfferFetcher
 from gumtreeofferurls import GumtreeOfferUrls
 from logger import Logger
+from filestorage import FileStorage
 
 InjectDependency.setDependency('logger', Logger.toFile('diagnostics/logger.txt'))
 InjectDependency.setDependency('printer', Utf8Printer)
@@ -23,7 +24,8 @@ InjectDependency.setDependency('offerfetcher', ParallelGumtreeOfferFetcher)
 InjectDependency.setDependency('offerurls', GumtreeOfferUrls)
 InjectDependency.setDependency('addressresolver', AddressResolver)
 
-addressstorage = Wardrobe.fromFile('data/cachedaddresses.db')
+
+addressstorage = Wardrobe(FileStorage('data/cachedaddresses.db'))
 InjectDependency.setDependency('geocoder', GeocoderWithCache(storage=addressstorage))
 
 offerCache = Wardrobe.fromFile('data/cachedoffers.db')
