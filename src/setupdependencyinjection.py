@@ -28,5 +28,5 @@ InjectDependency.setDependency('addressresolver', AddressResolver)
 addressstorage = Wardrobe(FileStorage('data/cachedaddresses.db'))
 InjectDependency.setDependency('geocoder', GeocoderWithCache(storage=addressstorage))
 
-offerCache = Wardrobe.fromFile('data/cachedoffers.db')
+offerCache = Wardrobe(FileStorage('data/cachedoffers.db'))
 InjectDependency.setDependency('offercache', offerCache)

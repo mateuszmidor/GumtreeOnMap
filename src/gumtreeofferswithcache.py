@@ -37,5 +37,13 @@ class GumtreeOffersWithCache():
                 offers.append(offercache[url])
             else:
                 fetcher.enqueueUrl(url)
-                
-        return offers + fetcher.offers()     
+         
+        fetchedOffers = fetcher.offers()    
+        GumtreeOffersWithCache.cacheOffers(fetchedOffers)         
+        return offers + fetchedOffers 
+    
+    @staticmethod 
+    def cacheOffers(offers):
+        for offer in offers:
+            url = offer["url"]
+            GumtreeOffersWithCache.offercache[url] = offer
